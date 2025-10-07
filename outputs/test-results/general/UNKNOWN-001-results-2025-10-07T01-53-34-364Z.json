@@ -1,0 +1,291 @@
+[
+  {
+    "testName": "Login with valid credentials",
+    "status": "passed",
+    "duration": 20366,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Customer Login' section is displayed on the left side of the page",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the URL of the account overview page contains '/overview.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Welcome' message displays the customer name",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Accounts Overview' heading is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the available accounts are listed with account numbers and balances",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the right side navigation menu displays the banking options",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Log Out' link is visible in the top navigation",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid credentials",
+    "status": "passed",
+    "duration": 11587,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid username 'invaliduser' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid password 'invalidpass' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the login fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Attempt to navigate to the protected account overview page",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that access is denied and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Try to access protected pages without logging in",
+    "status": "passed",
+    "duration": 12181,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Attempt to navigate to the protected account overview page",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that access is denied and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Attempt to navigate to the protected open account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that access is denied and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Complete flow with valid source account",
+    "status": "passed",
+    "duration": 16315,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the available accounts are listed with account numbers and balances",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Select the valid source account '29217'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Perform a banking transaction or action",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the transaction is successful and the account balance is updated accordingly (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Try with invalid source account",
+    "status": "passed",
+    "duration": 17738,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the available accounts are listed with account numbers and balances",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Select the invalid source account '12345'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Attempt to perform a banking transaction or action",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the transaction fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Edge case: Try to log in with empty fields",
+    "status": "passed",
+    "duration": 10903,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the username field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the password field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the login fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  }
+]

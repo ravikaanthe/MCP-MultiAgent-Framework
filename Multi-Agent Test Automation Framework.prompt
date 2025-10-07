@@ -1,0 +1,493 @@
+/*
+Build a multi-agent test automation framework with the following architecture:
+
+GOAL: Create an agent-to-agent collaboration system for test automation where each agent has a specific role.
+
+ARCHITECTURE:
+1. Agent 1 - Story Analyst Agent:
+   - Reads user stories in Gherkin or plain text format
+   - Extracts testable requirements, acceptance criteria, and edge cases
+   - Outputs structured JSON with: feature, actions, outcomes, edgeCases, acceptanceCriteria
+   - Uses Claude API (Anthropic) for intelligent analysis
+
+2. Agent 2 - Test Generator Agent:
+   - Takes requirements from Agent 1
+   - Generates detailed test cases with priorities (high/medium/low)
+   - Creates Playwright test scripts in natural language
+   - Outputs JSON array with: testName, steps, assertions, testData, priority
+   - Uses Claude API for test case generation
+
+3. Agent 3 - Test Executor Agent:
+   - Uses Playwright MCP (Model Context Protocol) for browser automation
+   - Connects to Playwright MCP server via stdio transport
+   - Translates natural language test steps into Playwright actions
+   - Available MCP tools: playwright_navigate, playwright_click, playwright_fill, 
+     playwright_screenshot, playwright_evaluate, playwright_get_text
+   - Executes tests and captures results (pass/fail, duration, screenshots, errors)
+   - Returns structured test results
+
+4. Agent 4 - Results Analyzer Agent:
+   - Analyzes test execution results from Agent 3
+   - Calculates metrics: pass rate, risk level, coverage gaps
+   - Identifies trends and patterns in failures
+   - Provides actionable recommendations
+   - Generates comprehensive test report
+   - Uses Claude API for intelligent analysis
+
+ORCHESTRATOR:
+- Coordinates all 4 agents in sequence
+- Manages data flow between agents
+- Handles error recovery and retries
+- Logs progress to console with emojis
+- Saves final results to JSON file
+
+TECHNICAL REQUIREMENTS:
+- Use ES6 modules (import/export)
+- Use @anthropic-ai/sdk for Claude API
+- Use @modelcontextprotocol/sdk for MCP
+- Use @playwright/mcp-server for Playwright integration
+- Environment variables for API keys (use dotenv)
+- Async/await for all operations
+- Error handling with try-catch
+- Colored console output for readability
+- TypeScript types (optional but preferred)
+
+MCP INTEGRATION SPECIFICS:
+- Initialize MCP client with StdioClientTransport
+- Connect to Playwright MCP server: npx -y @playwright/mcp-server
+- Use client.callTool() to execute Playwright actions
+- Handle MCP connection lifecycle (connect, execute, cleanup)
+- Implement fallback if MCP connection fails
+
+OUTPUT FORMAT:
+- Console: Real-time progress with emojis and formatting
+- File: test-results.json with complete execution data
+- Report: Summary with metrics, risks, and recommendations
+
+SAMPLE USER STORY TO TEST:
+As a user, I want to log into the application
+So that I can access my personalized dashboard
+
+Acceptance Criteria:
+- User can enter username and password
+- Valid credentials redirect to dashboard
+- Invalid credentials show error message
+- Password field is masked
+- Login button is disabled when fields are empty
+
+Create the complete implementation with all 4 agents, orchestrator, and MCP integration.
+Include detailed comments explaining each component.
+*/
+🎨 Step-by-Step Prompts (If You Want to Build Incrementally)
+Step 1: Story Analyst Agent
+/*
+Create Agent 1 - Story Analyst Agent
+
+Requirements:
+- Class name: StoryAnalystAgent
+- Method: async analyzeUserStory(userStory: string)
+- Uses Anthropic Claude API (claude-sonnet-4-5-20250929)
+- Extracts from user story:
+  * feature: main feature being tested
+  * actions: array of user actions
+  * outcomes: array of expected results
+  * edgeCases: array of edge cases to test
+  * acceptanceCriteria: array of criteria
+- Returns structured JSON object
+- Add error handling and fallback structure
+- Include console logging with 🔍 emoji
+
+Example input:
+"As a user, I want to login so that I can access my account"
+
+Example output:
+{
+  "feature": "User Authentication",
+  "actions": ["Enter username", "Enter password", "Click login"],
+  "outcomes": ["User is logged in", "Dashboard displayed"],
+  "edgeCases": ["Invalid credentials", "Empty fields"],
+  "acceptanceCriteria": ["Valid login succeeds", "Invalid login fails"]
+}
+*/
+Step 2: Test Generator Agent
+/*
+Create Agent 2 - Test Generator Agent
+
+Requirements:
+- Class name: TestGeneratorAgent
+- Method: async generateTestCases(requirements: object)
+- Takes output from StoryAnalystAgent
+- Uses Anthropic Claude API
+- Generates 3-5 test cases covering:
+  * Happy path scenarios
+  * Negative test cases
+  * Edge cases
+- Each test case has:
+  * testName: descriptive name
+  * steps: array of Playwright actions in natural language
+  * assertions: array of things to verify
+  * testData: object with test data
+  * priority: "high" | "medium" | "low"
+- Returns JSON array of test cases
+- Include console logging with 🧪 emoji
+
+Example output:
+[
+  {
+    "testName": "Successful login with valid credentials",
+    "steps": [
+      "Navigate to https://example.com/login",
+      "Fill username field with 'testuser'",
+      "Fill password field with 'password123'",
+      "Click login button"
+    ],
+    "assertions": [
+      "URL should be https://example.com/dashboard",
+      "Welcome message should be visible"
+    ],
+    "testData": { "username": "testuser", "password": "password123" },
+    "priority": "high"
+  }
+]
+*/
+Step 3: Test Executor Agent with MCP
+/*
+Create Agent 3 - Test Executor Agent with Playwright MCP Integration
+
+Requirements:
+- Class name: TestExecutorAgent
+- Initialize MCP client connection:
+  * Use @modelcontextprotocol/sdk/client
+  * StdioClientTransport with command: 'npx', args: ['-y', '@playwright/mcp-server']
+  * Client name: 'test-executor-agent'
+- Method: async initializeMCP() - establishes connection
+- Method: async executeTestCase(testCase: object) - runs one test
+- Method: async executeAllTests(testCases: array) - runs all tests
+- Method: async cleanup() - closes MCP connection
+
+For each test step:
+1. Use Claude API to convert natural language step to MCP tool call
+2. Parse which Playwright MCP tool to use:
+   - playwright_navigate: { url: string }
+   - playwright_click: { selector: string }
+   - playwright_fill: { selector: string, value: string }
+   - playwright_screenshot: { name: string }
+   - playwright_evaluate: { expression: string }
+   - playwright_get_text: { selector: string }
+3. Call: await mcpClient.callTool({ name: toolName, arguments: params })
+4. Capture result and errors
+
+Return test results with:
+- testName
+- status: "passed" | "failed"
+- duration: milliseconds
+- steps: array with each step status
+- errors: array of error messages
+- screenshots: array of screenshot paths
+
+Include console logging with 🚀 emoji
+Handle MCP connection errors gracefully
+Implement retry logic for flaky tests
+*/
+Step 4: Results Analyzer Agent
+/*
+Create Agent 4 - Results Analyzer Agent
+
+Requirements:
+- Class name: ResultsAnalyzerAgent
+- Method: async analyzeResults(testResults: array)
+- Uses Anthropic Claude API for intelligent analysis
+- Calculates:
+  * Total tests, passed, failed
+  * Pass rate percentage
+  * Average test duration
+- Analyzes and returns:
+  * summary: brief overview
+  * riskLevel: "high" | "medium" | "low" based on pass rate
+  * passRate: percentage
+  * coverageGaps: array of missing test scenarios
+  * trends: array of patterns (e.g., "Login tests failing consistently")
+  * recommendations: array of actionable improvements
+  * criticalIssues: array of urgent items
+
+- Method: generateReport(analysis, testResults)
+  * Prints formatted console report
+  * Uses box drawing characters and emojis
+  * Shows: metrics, risk level, test details, gaps, recommendations
+  
+Include console logging with 📊 emoji
+Make report visually appealing with colors and formatting
+*/
+Step 5: Orchestrator
+/*
+Create TestAutomationOrchestrator class
+
+Requirements:
+- Initializes all 4 agents in constructor
+- Method: async runPipeline(userStory: string)
+- Pipeline flow:
+  1. Call Agent 1 to analyze story
+  2. Pass results to Agent 2 to generate test cases
+  3. Call Agent 3 to initialize MCP and execute all tests
+  4. Pass test results to Agent 4 for analysis
+  5. Generate and display final report
+  6. Save complete results to test-results.json
+
+- Error handling at each step
+- Console logging for pipeline progress
+- Return complete results object:
+  {
+    timestamp: ISO date,
+    userStory: string,
+    requirements: object from Agent 1,
+    testCases: array from Agent 2,
+    testResults: array from Agent 3,
+    analysis: object from Agent 4,
+    totalExecutionTime: milliseconds
+  }
+
+Add delays between agents for rate limiting
+Clean up MCP connection after execution
+Include emojis: 🤖 for pipeline start, ✨ for completion
+*/
+Step 6: Main Entry Point
+/*
+Create main execution file
+
+Requirements:
+- Import all agents and orchestrator
+- Load environment variables (ANTHROPIC_API_KEY) using dotenv
+- Check if API key exists, exit with error if missing
+- Create sample user story constant
+- Main async function that:
+  * Creates orchestrator instance
+  * Calls runPipeline with sample user story
+  * Handles errors and logs them
+  * Exits with appropriate exit code
+- Export orchestrator for testing
+
+Include:
+- Environment validation
+- Error logging
+- Success/failure messages
+- Instructions for getting API key if missing
+*/
+🔧 Configuration Prompts
+Package.json Setup
+/*
+Create package.json for the multi-agent test automation framework
+
+Include:
+- name: "multi-agent-test-automation"
+- version: "1.0.0"
+- type: "module" (for ES6 imports)
+- main: "index.js"
+- scripts:
+  * start: "node index.js"
+  * test: "node index.js"
+- dependencies:
+  * @anthropic-ai/sdk: latest
+  * @modelcontextprotocol/sdk: latest
+  * dotenv: latest
+- devDependencies:
+  * @playwright/mcp-server: latest
+  * @types/node: latest (if using TypeScript)
+*/
+Environment Setup
+# Create .env.example file with this content:
+ANTHROPIC_API_KEY=your_api_key_here
+
+# Instructions:
+# 1. Copy .env.example to .env
+# 2. Get API key from https://console.anthropic.com/
+# 3. Replace your_api_key_here with actual key
+🎯 Complete Single Prompt (All-in-One)
+Use this if you want Copilot to generate everything at once:
+/*
+==============================================================================
+MULTI-AGENT TEST AUTOMATION FRAMEWORK WITH PLAYWRIGHT MCP
+==============================================================================
+
+Build a complete, production-ready multi-agent test automation system.
+
+SYSTEM OVERVIEW:
+- 4 specialized AI agents that collaborate sequentially
+- Each agent performs specific test automation tasks
+- Uses Playwright MCP for browser automation
+- Uses Claude API for intelligent processing
+- Agent-to-agent data passing with structured formats
+
+AGENT 1 - STORY ANALYST:
+Class: StoryAnalystAgent
+Purpose: Parse and understand user stories
+Input: User story text (Gherkin or plain English)
+Process: 
+  - Use Claude API to extract requirements
+  - Identify testable components
+  - Find edge cases and acceptance criteria
+Output: JSON { feature, actions, outcomes, edgeCases, acceptanceCriteria }
+API: Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)
+
+AGENT 2 - TEST GENERATOR:
+Class: TestGeneratorAgent
+Purpose: Generate comprehensive test cases
+Input: Requirements from Agent 1
+Process:
+  - Use Claude API to create test scenarios
+  - Cover happy path, negative cases, edge cases
+  - Prioritize tests (high/medium/low)
+  - Generate natural language Playwright steps
+Output: JSON array [{ testName, steps, assertions, testData, priority }]
+API: Claude Sonnet 4.5
+
+AGENT 3 - TEST EXECUTOR:
+Class: TestExecutorAgent
+Purpose: Execute tests via Playwright MCP
+Input: Test cases from Agent 2
+Process:
+  - Initialize MCP client with StdioClientTransport
+  - Connect to Playwright server: npx -y @playwright/mcp-server
+  - For each test step:
+    a) Use Claude to translate natural language → MCP tool call
+    b) Execute via mcpClient.callTool()
+    c) Capture results, screenshots, errors
+  - Available tools: playwright_navigate, playwright_click, playwright_fill,
+    playwright_screenshot, playwright_evaluate, playwright_get_text
+Output: JSON array [{ testName, status, duration, steps, errors, screenshots }]
+MCP: @modelcontextprotocol/sdk
+Playwright: @playwright/mcp-server
+
+AGENT 4 - RESULTS ANALYZER:
+Class: ResultsAnalyzerAgent
+Purpose: Analyze results and provide insights
+Input: Test results from Agent 3
+Process:
+  - Calculate metrics (pass rate, duration, etc.)
+  - Use Claude API to identify patterns and trends
+  - Assess risk level
+  - Find coverage gaps
+  - Generate recommendations
+Output: JSON { summary, riskLevel, passRate, coverageGaps, trends, recommendations }
+Report: Formatted console output with emojis and colors
+API: Claude Sonnet 4.5
+
+ORCHESTRATOR:
+Class: TestAutomationOrchestrator
+Purpose: Coordinate all agents
+Method: async runPipeline(userStory)
+Flow:
+  1. Initialize all 4 agents
+  2. Agent 1: Analyze story → requirements
+  3. Agent 2: Generate tests → testCases
+  4. Agent 3: Execute tests → testResults (with MCP)
+  5. Agent 4: Analyze results → analysis + report
+  6. Save to test-results.json
+  7. Cleanup MCP connection
+Error Handling: Try-catch at each step, graceful degradation
+Logging: Console with emojis (🔍🧪🚀📊) and progress indicators
+
+TECHNICAL STACK:
+- Language: JavaScript (ES6 modules) or TypeScript
+- Claude API: @anthropic-ai/sdk
+- MCP: @modelcontextprotocol/sdk
+- Playwright: @playwright/mcp-server
+- Environment: dotenv for API keys
+- Node version: 18+
+
+FILE STRUCTURE:
+- index.js (or index.ts) - Main entry point
+- agents/
+  - story-analyst.js
+  - test-generator.js
+  - test-executor.js
+  - results-analyzer.js
+- orchestrator.js
+- package.json
+- .env (API keys)
+- .env.example (template)
+- README.md (usage instructions)
+
+MCP INTEGRATION DETAILS:
+Import: 
+  import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+  import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+
+Initialize:
+  const transport = new StdioClientTransport({
+    command: 'npx',
+    args: ['-y', '@playwright/mcp-server']
+  });
+  const client = new Client({ name: 'agent', version: '1.0.0' }, { capabilities: {} });
+  await client.connect(transport);
+
+Execute:
+  const result = await client.callTool({
+    name: 'playwright_click',
+    arguments: { selector: '#login-button' }
+  });
+
+Cleanup:
+  await client.close();
+
+ERROR HANDLING:
+- Validate API key on startup
+- Handle MCP connection failures (provide simulation fallback)
+- Retry failed tests (max 3 attempts)
+- Catch and log all errors with context
+- Graceful degradation if Claude API rate limited
+
+OUTPUT FORMAT:
+Console:
+  - Real-time progress with colored output
+  - Emojis for visual feedback
+  - Box drawing for reports
+  - Clear section separators
+
+File (test-results.json):
+  {
+    "timestamp": "ISO 8601 date",
+    "userStory": "original story",
+    "requirements": "Agent 1 output",
+    "testCases": "Agent 2 output",
+    "testResults": "Agent 3 output",
+    "analysis": "Agent 4 output",
+    "totalExecutionTime": "milliseconds"
+  }
+
+SAMPLE USER STORY FOR TESTING:
+As a user, I want to log into the application
+So that I can access my personalized dashboard
+
+Acceptance Criteria:
+- User can enter username and password
+- Valid credentials redirect to dashboard  
+- Invalid credentials show error message
+- Password field is masked
+- Login button is disabled when fields are empty
+
+REQUIREMENTS:
+1. All code must be production-ready with error handling
+2. Include comprehensive comments
+3. Use async/await (no callbacks)
+4. Type safety (use JSDoc or TypeScript)
+5. Modular design (single responsibility principle)
+6. Configuration via environment variables
+7. Logging at each major step
+8. Unit testable components
+
+DELIVERABLES:
+- Complete working implementation
+- All 4 agents as separate classes
+- Orchestrator coordinating the flow
+- MCP integration for Playwright
+- Sample execution with provided user story
+- Error handling throughout
+- Console output formatting
+- JSON results file generation
+- README with setup instructions
+
+Start with the orchestrator file and work backwards through each agent.
+Include all necessary imports and error handling.
+Make it extensible for future enhancements.
+==============================================================================
+*/

@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Results - ACCT-002</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .header { background: #f5f5f5; padding: 20px; border-radius: 5px; }
+        .summary { display: flex; gap: 20px; margin: 20px 0; }
+        .stat { background: #e8f4f8; padding: 15px; border-radius: 5px; text-align: center; }
+        .test-case { border: 1px solid #ddd; margin: 10px 0; padding: 15px; border-radius: 5px; }
+        .passed { border-left: 5px solid #4caf50; }
+        .failed { border-left: 5px solid #f44336; }
+        .step { margin: 5px 0; padding: 5px; background: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Test Results: ACCT-002</h1>
+        <p>Module: account-management</p>
+        <p>Generated: 2025-10-07T00:12:35.439Z</p>
+    </div>
+    
+    <div class="summary">
+        <div class="stat">
+            <h3>6</h3>
+            <p>Total Tests</p>
+        </div>
+        <div class="stat">
+            <h3>6</h3>
+            <p>Passed</p>
+        </div>
+        <div class="stat">
+            <h3>0</h3>
+            <p>Failed</p>
+        </div>
+        <div class="stat">
+            <h3>100.0%</h3>
+            <p>Pass Rate</p>
+        </div>
+    </div>
+    
+    <div class="test-results">
+        
+            <div class="test-case passed">
+                <h3>Successful Login and Open New Savings Account</h3>
+                <p><strong>Status:</strong> PASSED</p>
+                <p><strong>Duration:</strong> 68ms</p>
+                
+                <div class="steps">
+                    <h4>Steps:</h4>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Enter the valid username 'ficusroot'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Enter the valid password 'katal@n@ravi'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Click the Log In button
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that login is successful and user is redirected to the dashboard (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the 'Open New Account' page at 'https://parabank.parasoft.com/parabank/openaccount.htm'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Select 'SAVINGS' as the account type
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Select the valid source account '29217' from the dropdown
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Click the 'Open new account' button
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that a new savings account is created with a unique account number (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Store the new account number in a variable called 'AccountNumber'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the new account overview page
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that the new account has an initial balance of $90.00 (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that the transaction history shows the opening deposit transfer (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                </div>
+            </div>
+        
+            <div class="test-case passed">
+                <h3>Login with Invalid Credentials</h3>
+                <p><strong>Status:</strong> PASSED</p>
+                <p><strong>Duration:</strong> 25ms</p>
+                
+                <div class="steps">
+                    <h4>Steps:</h4>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Enter the invalid username 'invaliduser'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Enter the invalid password 'invalidpass'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Click the Log In button
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that login fails and an error message is displayed (EXPECT: FAILURE)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                </div>
+            </div>
+        
+            <div class="test-case passed">
+                <h3>Access Protected Page Without Login</h3>
+                <p><strong>Status:</strong> PASSED</p>
+                <p><strong>Duration:</strong> 9ms</p>
+                
+                <div class="steps">
+                    <h4>Steps:</h4>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Attempt to navigate to the 'Open New Account' page at 'https://parabank.parasoft.com/parabank/openaccount.htm' without logging in
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that access is denied and the user is redirected to the login page (EXPECT: FAILURE)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                </div>
+            </div>
+        
+            <div class="test-case passed">
+                <h3>Open New Savings Account with Valid Source Account</h3>
+                <p><strong>Status:</strong> PASSED</p>
+                <p><strong>Duration:</strong> 63ms</p>
+                
+                <div class="steps">
+                    <h4>Steps:</h4>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Enter the valid username 'ficusroot'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Enter the valid password 'katal@n@ravi'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Click the Log In button
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that login is successful and user is redirected to the dashboard (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the 'Open New Account' page at 'https://parabank.parasoft.com/parabank/openaccount.htm'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Select 'SAVINGS' as the account type
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Select the valid source account '29217' from the dropdown
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Click the 'Open new account' button
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that a new savings account is created with a unique account number (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Store the new account number in a variable called 'AccountNumber'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the new account overview page
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that the new account has an initial balance of $90.00 (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that the transaction history shows the opening deposit transfer (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                </div>
+            </div>
+        
+            <div class="test-case passed">
+                <h3>Open New Savings Account with Invalid Source Account</h3>
+                <p><strong>Status:</strong> PASSED</p>
+                <p><strong>Duration:</strong> 46ms</p>
+                
+                <div class="steps">
+                    <h4>Steps:</h4>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Enter the valid username 'ficusroot'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Enter the valid password 'katal@n@ravi'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Click the Log In button
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that login is successful and user is redirected to the dashboard (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the 'Open New Account' page at 'https://parabank.parasoft.com/parabank/openaccount.htm'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Select 'SAVINGS' as the account type
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Select the invalid source account '12345' from the dropdown
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Click the 'Open new account' button
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that the account creation fails and an error message is displayed (EXPECT: FAILURE)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                </div>
+            </div>
+        
+            <div class="test-case passed">
+                <h3>Boundary Condition: Open New Savings Account with Minimum Balance</h3>
+                <p><strong>Status:</strong> PASSED</p>
+                <p><strong>Duration:</strong> 67ms</p>
+                
+                <div class="steps">
+                    <h4>Steps:</h4>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Enter the valid username 'ficusroot'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Enter the valid password 'katal@n@ravi'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Click the Log In button
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that login is successful and user is redirected to the dashboard (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the 'Open New Account' page at 'https://parabank.parasoft.com/parabank/openaccount.htm'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Select 'SAVINGS' as the account type
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Select the valid source account '29217' from the dropdown
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Click the 'Open new account' button
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that a new savings account is created with a unique account number (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Store the new account number in a variable called 'AccountNumber'
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Navigate to the new account overview page
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that the new account has an initial balance of $90.00 (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                        <div class="step">
+                            <strong>Step:</strong> Verify that the transaction history shows the opening deposit transfer (EXPECT: SUCCESS)
+                            <br><em>Status: passed</em>
+                        </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</body>
+</html>

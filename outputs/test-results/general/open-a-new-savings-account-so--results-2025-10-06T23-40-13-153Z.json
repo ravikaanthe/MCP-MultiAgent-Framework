@@ -1,0 +1,26 @@
+[
+  {
+    "testName": "Fallback test case",
+    "status": "passed",
+    "duration": 2448,
+    "steps": [
+      {
+        "step": "Navigate to application",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Perform basic action",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify result",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  }
+]

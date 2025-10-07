@@ -1,0 +1,806 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 MCP Test Automation Results - ACCT-002</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header .subtitle { font-size: 1.2em; opacity: 0.9; }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .stat-number { font-size: 2.5em; font-weight: bold; margin-bottom: 5px; }
+        .stat-label { color: #666; font-size: 0.9em; }
+        .passed { color: #27ae60; }
+        .failed { color: #e74c3c; }
+        .total { color: #3498db; }
+        .duration { color: #f39c12; }
+        
+        .test-results { padding: 30px; }
+        .test-case {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .test-header {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .test-title { font-size: 1.3em; font-weight: bold; }
+        .test-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8em;
+        }
+        .status-passed { background: #27ae60; }
+        .status-failed { background: #e74c3c; }
+        
+        .test-steps { padding: 20px; }
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .step:last-child { border-bottom: none; }
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        .step-passed { background: #27ae60; }
+        .step-failed { background: #e74c3c; }
+        .step-content { flex: 1; }
+        .step-text { font-weight: 500; margin-bottom: 5px; }
+        .step-duration { font-size: 0.8em; color: #666; }
+        .step-error { 
+            background: #fff5f5; 
+            border: 1px solid #fed7d7; 
+            color: #c53030; 
+            padding: 10px; 
+            border-radius: 5px; 
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        
+        .screenshots {
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .screenshot {
+            background: white;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .screenshot img {
+            max-width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .test-case { animation: slideIn 0.5s ease-out; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 MCP Test Automation Results</h1>
+            <div class="subtitle">Story: ACCT-002 | Module: account-management</div>
+            <div class="subtitle">Generated: 10/5/2025, 11:57:42 PM</div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number total">6</div>
+                <div class="stat-label">Total Tests</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number passed">6</div>
+                <div class="stat-label">Passed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number failed">0</div>
+                <div class="stat-label">Failed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number duration">100.0%</div>
+                <div class="stat-label">Pass Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number duration">9328ms</div>
+                <div class="stat-label">Avg Duration</div>
+            </div>
+        </div>
+        
+        <div class="test-results">
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Login with valid credentials and open savings account</div>
+                        <div class="test-status status-passed">passed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'</div>
+                                    <div class="step-duration">Duration: 2611ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter username 'ficusroot'</div>
+                                    <div class="step-duration">Duration: 700ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter password 'katal@n@ravi'</div>
+                                    <div class="step-duration">Duration: 623ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click Log In button</div>
+                                    <div class="step-duration">Duration: 405ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'</div>
+                                    <div class="step-duration">Duration: 2429ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select 'SAVINGS' as account type</div>
+                                    <div class="step-duration">Duration: 468ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select source account '29217' from dropdown</div>
+                                    <div class="step-duration">Duration: 450ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click Open new account button</div>
+                                    <div class="step-duration">Duration: 2590ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                        <div class="screenshots">
+                            <h4>📸 Screenshots</h4>
+                            <div class="screenshot-grid">
+                                
+                                    <div class="screenshot">
+                                        <div>Login with valid credentials and open savings account-step-4.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Login with valid credentials and open savings account-step-5.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Login with valid credentials and open savings account-step-8.png</div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Login with invalid credentials</div>
+                        <div class="test-status status-passed">passed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'</div>
+                                    <div class="step-duration">Duration: 2321ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter username 'invaliduser'</div>
+                                    <div class="step-duration">Duration: 590ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter password 'invalidpass'</div>
+                                    <div class="step-duration">Duration: 557ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click Log In button</div>
+                                    <div class="step-duration">Duration: 342ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                        <div class="screenshots">
+                            <h4>📸 Screenshots</h4>
+                            <div class="screenshot-grid">
+                                
+                                    <div class="screenshot">
+                                        <div>Login with invalid credentials-step-1.png</div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Try to access protected page without logging in</div>
+                        <div class="test-status status-passed">passed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate directly to Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'</div>
+                                    <div class="step-duration">Duration: 1ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                </div>
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Open savings account with valid source account</div>
+                        <div class="test-status status-passed">passed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'</div>
+                                    <div class="step-duration">Duration: 2526ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter username 'ficusroot'</div>
+                                    <div class="step-duration">Duration: 733ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter password 'katal@n@ravi'</div>
+                                    <div class="step-duration">Duration: 807ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click Log In button</div>
+                                    <div class="step-duration">Duration: 416ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'</div>
+                                    <div class="step-duration">Duration: 2498ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select 'SAVINGS' as account type</div>
+                                    <div class="step-duration">Duration: 602ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select source account '29217' from dropdown</div>
+                                    <div class="step-duration">Duration: 549ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click Open new account button</div>
+                                    <div class="step-duration">Duration: 2997ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                        <div class="screenshots">
+                            <h4>📸 Screenshots</h4>
+                            <div class="screenshot-grid">
+                                
+                                    <div class="screenshot">
+                                        <div>Open savings account with valid source account-step-1.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Open savings account with valid source account-step-4.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Open savings account with valid source account-step-5.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Open savings account with valid source account-step-8.png</div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Try to open savings account with invalid source account</div>
+                        <div class="test-status status-passed">passed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'</div>
+                                    <div class="step-duration">Duration: 2903ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter username 'ficusroot'</div>
+                                    <div class="step-duration">Duration: 794ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter password 'katal@n@ravi'</div>
+                                    <div class="step-duration">Duration: 590ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click Log In button</div>
+                                    <div class="step-duration">Duration: 325ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'</div>
+                                    <div class="step-duration">Duration: 2607ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select 'SAVINGS' as account type</div>
+                                    <div class="step-duration">Duration: 500ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select source account '12345' from dropdown</div>
+                                    <div class="step-duration">Duration: 262ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click Open new account button</div>
+                                    <div class="step-duration">Duration: 2283ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                        <div class="screenshots">
+                            <h4>📸 Screenshots</h4>
+                            <div class="screenshot-grid">
+                                
+                                    <div class="screenshot">
+                                        <div>Try to open savings account with invalid source account-step-1.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Try to open savings account with invalid source account-step-4.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Try to open savings account with invalid source account-step-5.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Try to open savings account with invalid source account-step-8.png</div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Verify transaction history for new savings account</div>
+                        <div class="test-status status-passed">passed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'</div>
+                                    <div class="step-duration">Duration: 2616ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter username 'ficusroot'</div>
+                                    <div class="step-duration">Duration: 591ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter password 'katal@n@ravi'</div>
+                                    <div class="step-duration">Duration: 623ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click Log In button</div>
+                                    <div class="step-duration">Duration: 342ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'</div>
+                                    <div class="step-duration">Duration: 2628ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select 'SAVINGS' as account type</div>
+                                    <div class="step-duration">Duration: 450ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select source account '29217' from dropdown</div>
+                                    <div class="step-duration">Duration: 447ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click Open new account button</div>
+                                    <div class="step-duration">Duration: 2997ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click on the new account number link in the account overview page</div>
+                                    <div class="step-duration">Duration: 345ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Verify the transaction history for the new savings account</div>
+                                    <div class="step-duration">Duration: 247ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                        <div class="screenshots">
+                            <h4>📸 Screenshots</h4>
+                            <div class="screenshot-grid">
+                                
+                                    <div class="screenshot">
+                                        <div>Verify transaction history for new savings account-step-1.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Verify transaction history for new savings account-step-4.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Verify transaction history for new savings account-step-5.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Verify transaction history for new savings account-step-8.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Verify transaction history for new savings account-step-9.png</div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+        </div>
+        
+        <div class="footer">
+            <div>🤖 Generated by Natural Language Test Automation Executor</div>
+            <div>MCP Playwright Browser Automation Framework</div>
+        </div>
+    </div>
+</body>
+</html>

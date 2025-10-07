@@ -1,0 +1,749 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 MCP Test Automation Results - ACCT-002</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header .subtitle { font-size: 1.2em; opacity: 0.9; }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .stat-number { font-size: 2.5em; font-weight: bold; margin-bottom: 5px; }
+        .stat-label { color: #666; font-size: 0.9em; }
+        .passed { color: #27ae60; }
+        .failed { color: #e74c3c; }
+        .total { color: #3498db; }
+        .duration { color: #f39c12; }
+        
+        .test-results { padding: 30px; }
+        .test-case {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .test-header {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .test-title { font-size: 1.3em; font-weight: bold; }
+        .test-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8em;
+        }
+        .status-passed { background: #27ae60; }
+        .status-failed { background: #e74c3c; }
+        
+        .test-steps { padding: 20px; }
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .step:last-child { border-bottom: none; }
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        .step-passed { background: #27ae60; }
+        .step-failed { background: #e74c3c; }
+        .step-content { flex: 1; }
+        .step-text { font-weight: 500; margin-bottom: 5px; }
+        .step-duration { font-size: 0.8em; color: #666; }
+        .step-error { 
+            background: #fff5f5; 
+            border: 1px solid #fed7d7; 
+            color: #c53030; 
+            padding: 10px; 
+            border-radius: 5px; 
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        
+        .screenshots {
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .screenshot {
+            background: white;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .screenshot img {
+            max-width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .test-case { animation: slideIn 0.5s ease-out; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 MCP Test Automation Results</h1>
+            <div class="subtitle">Story: ACCT-002 | Module: account-management</div>
+            <div class="subtitle">Generated: 10/6/2025, 12:30:01 AM</div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number total">6</div>
+                <div class="stat-label">Total Tests</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number passed">4</div>
+                <div class="stat-label">Passed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number failed">2</div>
+                <div class="stat-label">Failed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number duration">66.7%</div>
+                <div class="stat-label">Pass Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number duration">6220ms</div>
+                <div class="stat-label">Avg Duration</div>
+            </div>
+        </div>
+        
+        <div class="test-results">
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Login with valid credentials and complete main flow</div>
+                        <div class="test-status status-failed">failed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'</div>
+                                    <div class="step-duration">Duration: 2753ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter the valid username 'invaliduser'</div>
+                                    <div class="step-duration">Duration: 741ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter the valid password 'wrongpassword'</div>
+                                    <div class="step-duration">Duration: 540ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-failed">
+                                    ✗
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click the Log In button</div>
+                                    <div class="step-duration">Duration: 514ms</div>
+                                    <div class="step-error">❌ Error: Login failed: Invalid credentials (invaliduser/****)</div>
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-failed">
+                                    ✗
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Verify that the user is redirected to the account overview page</div>
+                                    <div class="step-duration">Duration: 0ms</div>
+                                    <div class="step-error">❌ Error: Skipped due to critical prerequisite failure</div>
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-failed">
+                                    ✗
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Perform various banking actions (e.g., view account details, transfer funds, etc.)</div>
+                                    <div class="step-duration">Duration: 0ms</div>
+                                    <div class="step-error">❌ Error: Skipped due to critical prerequisite failure</div>
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-failed">
+                                    ✗
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Verify that all the expected functionality works as intended</div>
+                                    <div class="step-duration">Duration: 0ms</div>
+                                    <div class="step-error">❌ Error: Skipped due to critical prerequisite failure</div>
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                        <div class="screenshots">
+                            <h4>📸 Screenshots</h4>
+                            <div class="screenshot-grid">
+                                
+                                    <div class="screenshot">
+                                        <div>Login with valid credentials and complete main flow-step-1.png</div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Login with invalid credentials and verify user is not able to login</div>
+                        <div class="test-status status-failed">failed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'</div>
+                                    <div class="step-duration">Duration: 2097ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter the invalid username 'invaliduser'</div>
+                                    <div class="step-duration">Duration: 793ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter the invalid password 'invalidpass'</div>
+                                    <div class="step-duration">Duration: 571ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-failed">
+                                    ✗
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click the Log In button</div>
+                                    <div class="step-duration">Duration: 438ms</div>
+                                    <div class="step-error">❌ Error: Login failed: Invalid credentials (invaliduser/****)</div>
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-failed">
+                                    ✗
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Verify that the user is not able to login and an error message is displayed</div>
+                                    <div class="step-duration">Duration: 0ms</div>
+                                    <div class="step-error">❌ Error: Skipped due to critical prerequisite failure</div>
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                        <div class="screenshots">
+                            <h4>📸 Screenshots</h4>
+                            <div class="screenshot-grid">
+                                
+                                    <div class="screenshot">
+                                        <div>Login with invalid credentials and verify user is not able to login-step-1.png</div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Attempt to access protected pages without logging in</div>
+                        <div class="test-status status-passed">passed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to the ParaBank Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'</div>
+                                    <div class="step-duration">Duration: 3ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Verify that the user is redirected to the login page and cannot access the protected page</div>
+                                    <div class="step-duration">Duration: 241ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                </div>
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Complete flow with valid source account</div>
+                        <div class="test-status status-passed">passed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'</div>
+                                    <div class="step-duration">Duration: 2245ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter the valid username 'ficusroot'</div>
+                                    <div class="step-duration">Duration: 513ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter the valid password 'katal@n@ravi'</div>
+                                    <div class="step-duration">Duration: 665ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click the Log In button</div>
+                                    <div class="step-duration">Duration: 374ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to the Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'</div>
+                                    <div class="step-duration">Duration: 2136ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select the 'SAVINGS' account type</div>
+                                    <div class="step-duration">Duration: 482ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select the valid source account '29217' from the dropdown</div>
+                                    <div class="step-duration">Duration: 415ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click the Open new account button</div>
+                                    <div class="step-duration">Duration: 2642ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Verify that the new account is created successfully</div>
+                                    <div class="step-duration">Duration: 250ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                        <div class="screenshots">
+                            <h4>📸 Screenshots</h4>
+                            <div class="screenshot-grid">
+                                
+                                    <div class="screenshot">
+                                        <div>Complete flow with valid source account-step-1.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Complete flow with valid source account-step-4.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Complete flow with valid source account-step-5.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Complete flow with valid source account-step-8.png</div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Attempt to open a new account with an invalid source account</div>
+                        <div class="test-status status-passed">passed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'</div>
+                                    <div class="step-duration">Duration: 2049ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter the valid username 'ficusroot'</div>
+                                    <div class="step-duration">Duration: 699ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Enter the valid password 'katal@n@ravi'</div>
+                                    <div class="step-duration">Duration: 558ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click the Log In button</div>
+                                    <div class="step-duration">Duration: 331ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Navigate to the Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'</div>
+                                    <div class="step-duration">Duration: 2574ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select the 'SAVINGS' account type</div>
+                                    <div class="step-duration">Duration: 584ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Select the invalid source account '12345' from the dropdown</div>
+                                    <div class="step-duration">Duration: 278ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Click the Open new account button</div>
+                                    <div class="step-duration">Duration: 2572ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Verify that the account creation fails with an appropriate error message</div>
+                                    <div class="step-duration">Duration: 287ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                        <div class="screenshots">
+                            <h4>📸 Screenshots</h4>
+                            <div class="screenshot-grid">
+                                
+                                    <div class="screenshot">
+                                        <div>Attempt to open a new account with an invalid source account-step-1.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Attempt to open a new account with an invalid source account-step-4.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Attempt to open a new account with an invalid source account-step-5.png</div>
+                                    </div>
+                                
+                                    <div class="screenshot">
+                                        <div>Attempt to open a new account with an invalid source account-step-8.png</div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-case">
+                    <div class="test-header">
+                        <div class="test-title">🧪 Verify network error handling</div>
+                        <div class="test-status status-passed">passed</div>
+                    </div>
+                    
+                    <div class="test-steps">
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Simulate a network error (e.g., by disabling the internet connection)</div>
+                                    <div class="step-duration">Duration: 292ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Attempt to perform various banking actions (e.g., login, open a new account, transfer funds, etc.)</div>
+                                    <div class="step-duration">Duration: 2512ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Verify that the application handles the network error gracefully and displays appropriate error messages to the user</div>
+                                    <div class="step-duration">Duration: 281ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="step">
+                                <div class="step-icon step-passed">
+                                    ✓
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-text">Restore the network connection and verify that the application resumes normal operation</div>
+                                    <div class="step-duration">Duration: 217ms</div>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                    
+                    
+                        <div class="screenshots">
+                            <h4>📸 Screenshots</h4>
+                            <div class="screenshot-grid">
+                                
+                                    <div class="screenshot">
+                                        <div>Verify network error handling-step-2.png</div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                </div>
+            
+        </div>
+        
+        <div class="footer">
+            <div>🤖 Generated by Natural Language Test Automation Executor</div>
+            <div>MCP Playwright Browser Automation Framework</div>
+        </div>
+    </div>
+</body>
+</html>

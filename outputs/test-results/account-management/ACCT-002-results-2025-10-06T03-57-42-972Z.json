@@ -1,0 +1,273 @@
+[
+  {
+    "testName": "Login with valid credentials and open savings account",
+    "status": "passed",
+    "duration": 12316,
+    "steps": [
+      {
+        "step": "Navigate to ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 2611
+      },
+      {
+        "step": "Enter username 'ficusroot'",
+        "status": "passed",
+        "duration": 700
+      },
+      {
+        "step": "Enter password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 623
+      },
+      {
+        "step": "Click Log In button",
+        "status": "passed",
+        "duration": 405
+      },
+      {
+        "step": "Navigate to Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 2429
+      },
+      {
+        "step": "Select 'SAVINGS' as account type",
+        "status": "passed",
+        "duration": 468
+      },
+      {
+        "step": "Select source account '29217' from dropdown",
+        "status": "passed",
+        "duration": 450
+      },
+      {
+        "step": "Click Open new account button",
+        "status": "passed",
+        "duration": 2590
+      }
+    ],
+    "errors": [],
+    "screenshots": [
+      "Login with valid credentials and open savings account-step-4.png",
+      "Login with valid credentials and open savings account-step-5.png",
+      "Login with valid credentials and open savings account-step-8.png"
+    ]
+  },
+  {
+    "testName": "Login with invalid credentials",
+    "status": "passed",
+    "duration": 4317,
+    "steps": [
+      {
+        "step": "Navigate to ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 2321
+      },
+      {
+        "step": "Enter username 'invaliduser'",
+        "status": "passed",
+        "duration": 590
+      },
+      {
+        "step": "Enter password 'invalidpass'",
+        "status": "passed",
+        "duration": 557
+      },
+      {
+        "step": "Click Log In button",
+        "status": "passed",
+        "duration": 342
+      }
+    ],
+    "errors": [],
+    "screenshots": [
+      "Login with invalid credentials-step-1.png"
+    ]
+  },
+  {
+    "testName": "Try to access protected page without logging in",
+    "status": "passed",
+    "duration": 1,
+    "steps": [
+      {
+        "step": "Navigate directly to Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 1
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Open savings account with valid source account",
+    "status": "passed",
+    "duration": 13177,
+    "steps": [
+      {
+        "step": "Navigate to ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 2526
+      },
+      {
+        "step": "Enter username 'ficusroot'",
+        "status": "passed",
+        "duration": 733
+      },
+      {
+        "step": "Enter password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 807
+      },
+      {
+        "step": "Click Log In button",
+        "status": "passed",
+        "duration": 416
+      },
+      {
+        "step": "Navigate to Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 2498
+      },
+      {
+        "step": "Select 'SAVINGS' as account type",
+        "status": "passed",
+        "duration": 602
+      },
+      {
+        "step": "Select source account '29217' from dropdown",
+        "status": "passed",
+        "duration": 549
+      },
+      {
+        "step": "Click Open new account button",
+        "status": "passed",
+        "duration": 2997
+      }
+    ],
+    "errors": [],
+    "screenshots": [
+      "Open savings account with valid source account-step-1.png",
+      "Open savings account with valid source account-step-4.png",
+      "Open savings account with valid source account-step-5.png",
+      "Open savings account with valid source account-step-8.png"
+    ]
+  },
+  {
+    "testName": "Try to open savings account with invalid source account",
+    "status": "passed",
+    "duration": 12306,
+    "steps": [
+      {
+        "step": "Navigate to ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 2903
+      },
+      {
+        "step": "Enter username 'ficusroot'",
+        "status": "passed",
+        "duration": 794
+      },
+      {
+        "step": "Enter password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 590
+      },
+      {
+        "step": "Click Log In button",
+        "status": "passed",
+        "duration": 325
+      },
+      {
+        "step": "Navigate to Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 2607
+      },
+      {
+        "step": "Select 'SAVINGS' as account type",
+        "status": "passed",
+        "duration": 500
+      },
+      {
+        "step": "Select source account '12345' from dropdown",
+        "status": "passed",
+        "duration": 262
+      },
+      {
+        "step": "Click Open new account button",
+        "status": "passed",
+        "duration": 2283
+      }
+    ],
+    "errors": [],
+    "screenshots": [
+      "Try to open savings account with invalid source account-step-1.png",
+      "Try to open savings account with invalid source account-step-4.png",
+      "Try to open savings account with invalid source account-step-5.png",
+      "Try to open savings account with invalid source account-step-8.png"
+    ]
+  },
+  {
+    "testName": "Verify transaction history for new savings account",
+    "status": "passed",
+    "duration": 13849,
+    "steps": [
+      {
+        "step": "Navigate to ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 2616
+      },
+      {
+        "step": "Enter username 'ficusroot'",
+        "status": "passed",
+        "duration": 591
+      },
+      {
+        "step": "Enter password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 623
+      },
+      {
+        "step": "Click Log In button",
+        "status": "passed",
+        "duration": 342
+      },
+      {
+        "step": "Navigate to Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 2628
+      },
+      {
+        "step": "Select 'SAVINGS' as account type",
+        "status": "passed",
+        "duration": 450
+      },
+      {
+        "step": "Select source account '29217' from dropdown",
+        "status": "passed",
+        "duration": 447
+      },
+      {
+        "step": "Click Open new account button",
+        "status": "passed",
+        "duration": 2997
+      },
+      {
+        "step": "Click on the new account number link in the account overview page",
+        "status": "passed",
+        "duration": 345
+      },
+      {
+        "step": "Verify the transaction history for the new savings account",
+        "status": "passed",
+        "duration": 247
+      }
+    ],
+    "errors": [],
+    "screenshots": [
+      "Verify transaction history for new savings account-step-1.png",
+      "Verify transaction history for new savings account-step-4.png",
+      "Verify transaction history for new savings account-step-5.png",
+      "Verify transaction history for new savings account-step-8.png",
+      "Verify transaction history for new savings account-step-9.png"
+    ]
+  }
+]

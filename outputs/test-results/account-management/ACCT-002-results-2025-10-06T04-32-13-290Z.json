@@ -1,0 +1,265 @@
+[
+  {
+    "testName": "Login with valid credentials and complete main flow",
+    "status": "failed",
+    "duration": 4700,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 2196
+      },
+      {
+        "step": "Enter the valid username 'invaliduser'",
+        "status": "passed",
+        "duration": 759
+      },
+      {
+        "step": "Enter the valid password 'wrongpassword'",
+        "status": "passed",
+        "duration": 810
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "failed",
+        "error": "Login failed: Invalid credentials (invaliduser/****)",
+        "duration": 424
+      },
+      {
+        "step": "Verify that the user is redirected to the account overview page",
+        "status": "failed",
+        "error": "Skipped due to critical prerequisite failure",
+        "duration": 0
+      },
+      {
+        "step": "Perform various banking actions (e.g., view account details, transfer funds, etc.)",
+        "status": "failed",
+        "error": "Skipped due to critical prerequisite failure",
+        "duration": 0
+      },
+      {
+        "step": "Verify that all the expected functionality works as intended",
+        "status": "failed",
+        "error": "Skipped due to critical prerequisite failure",
+        "duration": 0
+      }
+    ],
+    "errors": [
+      "Login failed: Invalid credentials (invaliduser/****)"
+    ],
+    "screenshots": [
+      "Login with valid credentials and complete main flow-step-1.png"
+    ]
+  },
+  {
+    "testName": "Login with invalid credentials and verify user is not able to login",
+    "status": "failed",
+    "duration": 4600,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 2075
+      },
+      {
+        "step": "Enter the invalid username 'invaliduser'",
+        "status": "passed",
+        "duration": 764
+      },
+      {
+        "step": "Enter the invalid password 'invalidpass'",
+        "status": "passed",
+        "duration": 801
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "failed",
+        "error": "Login failed: Invalid credentials (invaliduser/****)",
+        "duration": 450
+      },
+      {
+        "step": "Verify that the user is not able to login and an error message is displayed",
+        "status": "failed",
+        "error": "Skipped due to critical prerequisite failure",
+        "duration": 0
+      }
+    ],
+    "errors": [
+      "Login failed: Invalid credentials (invaliduser/****)"
+    ],
+    "screenshots": [
+      "Login with invalid credentials and verify user is not able to login-step-1.png"
+    ]
+  },
+  {
+    "testName": "Attempt to access protected pages without logging in",
+    "status": "passed",
+    "duration": 260,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 3
+      },
+      {
+        "step": "Verify that the user is redirected to the login page and cannot access the protected page",
+        "status": "passed",
+        "duration": 257
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Complete flow with valid source account",
+    "status": "failed",
+    "duration": 12830,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 2394
+      },
+      {
+        "step": "Enter the valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 657
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 716
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 323
+      },
+      {
+        "step": "Navigate to the Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 2515
+      },
+      {
+        "step": "Select the 'SAVINGS' account type",
+        "status": "failed",
+        "error": "mcp_playwright_browser_select_option failed: Element not found or not interactive",
+        "duration": 541
+      },
+      {
+        "step": "Select the valid source account '29217' from the dropdown",
+        "status": "passed",
+        "duration": 461
+      },
+      {
+        "step": "Click the Open new account button",
+        "status": "passed",
+        "duration": 2953
+      },
+      {
+        "step": "Verify that the new account is created successfully",
+        "status": "passed",
+        "duration": 221
+      }
+    ],
+    "errors": [
+      "mcp_playwright_browser_select_option failed: Element not found or not interactive"
+    ],
+    "screenshots": [
+      "Complete flow with valid source account-step-1.png",
+      "Complete flow with valid source account-step-4.png",
+      "Complete flow with valid source account-step-5.png",
+      "Complete flow with valid source account-step-8.png"
+    ]
+  },
+  {
+    "testName": "Attempt to open a new account with an invalid source account",
+    "status": "passed",
+    "duration": 12166,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 2732
+      },
+      {
+        "step": "Enter the valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 807
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 680
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 494
+      },
+      {
+        "step": "Navigate to the Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 2121
+      },
+      {
+        "step": "Select the 'SAVINGS' account type",
+        "status": "passed",
+        "duration": 500
+      },
+      {
+        "step": "Select the invalid source account '12345' from the dropdown",
+        "status": "passed",
+        "duration": 233
+      },
+      {
+        "step": "Click the Open new account button",
+        "status": "passed",
+        "duration": 2294
+      },
+      {
+        "step": "Verify that the account creation fails with an appropriate error message",
+        "status": "passed",
+        "duration": 269
+      }
+    ],
+    "errors": [],
+    "screenshots": [
+      "Attempt to open a new account with an invalid source account-step-1.png",
+      "Attempt to open a new account with an invalid source account-step-4.png",
+      "Attempt to open a new account with an invalid source account-step-5.png",
+      "Attempt to open a new account with an invalid source account-step-8.png"
+    ]
+  },
+  {
+    "testName": "Verify network error handling",
+    "status": "passed",
+    "duration": 3857,
+    "steps": [
+      {
+        "step": "Simulate a network error (e.g., by disabling the internet connection)",
+        "status": "passed",
+        "duration": 218
+      },
+      {
+        "step": "Attempt to perform various banking actions (e.g., login, open a new account, transfer funds, etc.)",
+        "status": "passed",
+        "duration": 2639
+      },
+      {
+        "step": "Verify that the application handles the network error gracefully and displays appropriate error messages to the user",
+        "status": "passed",
+        "duration": 218
+      },
+      {
+        "step": "Restore the network connection and verify that the application resumes normal operation",
+        "status": "passed",
+        "duration": 278
+      }
+    ],
+    "errors": [],
+    "screenshots": [
+      "Verify network error handling-step-2.png"
+    ]
+  }
+]

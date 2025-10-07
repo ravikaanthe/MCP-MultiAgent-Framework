@@ -1,0 +1,202 @@
+[
+  {
+    "testName": "Login with valid credentials",
+    "status": "passed",
+    "duration": 23243,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the account overview page URL contains '/overview.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the 'Welcome' message displays the customer name",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the 'Accounts Overview' heading is present",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the available accounts are listed with account numbers and balances",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the right side navigation menu displays banking options",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the 'Log Out' link is visible in the top navigation",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid username",
+    "status": "passed",
+    "duration": 8772,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid username 'invaliduser' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the login fails and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid password",
+    "status": "passed",
+    "duration": 7766,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid password 'invalidpass' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the login fails and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with empty username and password",
+    "status": "passed",
+    "duration": 10825,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the username field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the password field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the login fails and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with special characters in username and password",
+    "status": "passed",
+    "duration": 6938,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the username with special characters '!@#$%^&*()' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the password with special characters '!@#$%^&*()' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the login fails and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  }
+]

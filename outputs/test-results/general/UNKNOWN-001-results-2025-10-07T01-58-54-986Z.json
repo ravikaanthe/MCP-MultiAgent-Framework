@@ -1,0 +1,271 @@
+[
+  {
+    "testName": "Verify Successful Login with Valid Credentials",
+    "status": "passed",
+    "duration": 26063,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Customer Login' section is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the URL contains '/overview.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the welcome message with the customer name is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Accounts Overview' heading is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the list of available accounts with account numbers and balances is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the right-side navigation menu with banking options is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Log Out' link is visible in the top navigation",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Verify Login Failure with Invalid Credentials",
+    "status": "passed",
+    "duration": 7460,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid username 'invaliduser'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid password 'invalidpass'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the login fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Verify Access Denied to Protected Pages without Login",
+    "status": "passed",
+    "duration": 9783,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Attempt to navigate to the protected account overview page",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that access is denied and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Verify Successful Account Opening with Valid Source Account",
+    "status": "passed",
+    "duration": 17827,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Navigate to the 'Open Account' page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid source account number '29217'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Open New Account' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that a new account is successfully opened and displayed on the account overview page",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Verify Failed Account Opening with Invalid Source Account",
+    "status": "passed",
+    "duration": 15482,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Navigate to the 'Open Account' page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid source account number '12345'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Open New Account' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the account opening fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Verify Login Failure with Empty Credentials",
+    "status": "passed",
+    "duration": 12077,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the username field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the password field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the login fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  }
+]

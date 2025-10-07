@@ -1,0 +1,40 @@
+{
+  "name": "multi-agent-test-automation",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "test": "npm run build && node dist/index.js",
+    "validate": "tsx src/utils/validate.ts",
+    "list-stories": "npm run build && node dist/index.js --list",
+    "story": "npm run build && node dist/index.js",
+    "story-cli": "npm run build && node dist/story-cli.js",
+    "prompt-cli": "npm run build && node dist/prompt-cli.js",
+    "view-prompts": "npm run build && node dist/prompt-cli.js list",
+    "test:dev": "TEST_ENV=development tsx src/index.ts",
+    "test:staging": "TEST_ENV=staging tsx src/index.ts",
+    "test:prod": "TEST_ENV=production tsx src/index.ts",
+    "env:info": "tsx src/scripts/env-runner.ts",
+    "framework": "tsx src/index.ts",
+    "test-only": "tsx src/cli/test-executor-only.ts",
+    "cleanup": "tsx src/scripts/cleanup.ts",
+    "clean": "npm run cleanup && npm run build"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.24.3",
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "chalk": "^5.3.0",
+    "commander": "^14.0.1",
+    "dotenv": "^16.4.5",
+    "playwright": "^1.55.1",
+    "playwright-mcp-server": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  }
+}

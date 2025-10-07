@@ -1,0 +1,316 @@
+[
+  {
+    "testName": "Positive Test: Login with valid credentials and complete main flow",
+    "status": "passed",
+    "duration": 55,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that login is successful and user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Navigate to the Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Select 'Savings' as the account type",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Select the valid source account '29217' from the dropdown",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Open new account button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that a new savings account is created with a unique account number (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Store the new account number in a variable called 'AccountNumber'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click on the new account number link",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the account overview page is displayed and the new savings account with the initial balance of $90.00 is reflected (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the transaction history shows the opening deposit transfer (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Negative Test: Login with invalid credentials",
+    "status": "passed",
+    "duration": 16,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid username 'invaliduser'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid password 'invalidpass'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that login fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Negative Test: Try to access protected pages without logging in",
+    "status": "passed",
+    "duration": 6,
+    "steps": [
+      {
+        "step": "Attempt to navigate to the Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm' without logging in",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that access is denied and the user is redirected to the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Positive Test: Complete flow with valid source account",
+    "status": "passed",
+    "duration": 43,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that login is successful and user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Navigate to the Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Select 'Savings' as the account type",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Select the valid source account '29217' from the dropdown",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Open new account button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that a new savings account is created with a unique account number (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Store the new account number in a variable called 'AccountNumber'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click on the new account number link",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the account overview page is displayed and the new savings account with the initial balance of $90.00 is reflected (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the transaction history shows the opening deposit transfer (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Negative Test: Try with invalid source account",
+    "status": "passed",
+    "duration": 37,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that login is successful and user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Navigate to the Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Select 'Savings' as the account type",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Select the invalid source account '12345' from the dropdown",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Open new account button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the new account is not created and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Edge Case: Try to open a new account with invalid credentials",
+    "status": "passed",
+    "duration": 26,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at 'https://parabank.parasoft.com/parabank/index.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid username 'invaliduser'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the invalid password 'invalidpass'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the Log In button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that login fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Attempt to navigate to the Open New Account page at 'https://parabank.parasoft.com/parabank/openaccount.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that access is denied and the user is redirected to the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  }
+]
