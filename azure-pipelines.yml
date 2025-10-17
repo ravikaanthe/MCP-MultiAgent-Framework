@@ -1,0 +1,122 @@
+# Azure Pipelines configuration for Multi-Agent Test Automation Framework
+# This pipeline sets up MCP Playwright server and runs your tests
+
+trigger:
+- main
+- develop
+
+pool:
+  vmImage: 'ubuntu-latest'  # or windows-latest if you prefer
+
+variables:
+  nodeVersion: '18.x'
+  displayName: 'Multi-Agent Test Automation'
+
+stages:
+- stage: Setup
+  displayName: 'Setup Environment'
+  jobs:
+  - job: InstallDependencies
+    displayName: 'Install Dependencies'
+    steps:
+    
+    - task: NodeTool@0
+      displayName: 'Install Node.js'
+      inputs:
+        versionSpec: $(nodeVersion)
+    
+    - task: Cache@2
+      displayName: 'Cache Node Modules'
+      inputs:
+        key: 'npm | "$(Agent.OS)" | package-lock.json'
+        restoreKeys: |
+          npm | "$(Agent.OS)"
+        path: $(npm_config_cache)
+    
+    - script: |
+        npm ci
+        npm run build
+      displayName: 'Install Project Dependencies'
+    
+    - script: |
+        npm install -g @modelcontextprotocol/server-playwright
+        npx playwright install
+      displayName: 'Install MCP Playwright Server & Browsers'
+
+- stage: Test
+  displayName: 'Run Tests'
+  dependsOn: Setup
+  jobs:
+  - job: RunTestSuite
+    displayName: 'Execute Multi-Agent Tests'
+    steps:
+    
+    - task: NodeTool@0
+      displayName: 'Install Node.js'
+      inputs:
+        versionSpec: $(nodeVersion)
+    
+    - script: npm ci
+      displayName: 'Restore Dependencies'
+    
+    - script: |
+        # Start MCP server in background
+        echo "Starting MCP Playwright Server..."
+        npx @modelcontextprotocol/server-playwright --stdio &
+        MCP_PID=$!
+        echo "MCP Server started with PID: $MCP_PID"
+        
+        # Wait for server to be ready
+        sleep 5
+        
+        # Set environment variable for tests
+        export MCP_SERVER_RUNNING=true
+        
+        # Run your test framework
+        npm run test -- AUTH-001
+        
+        # Store exit code
+        TEST_EXIT_CODE=$?
+        
+        # Clean up MCP server
+        kill $MCP_PID || true
+        
+        # Exit with test result
+        exit $TEST_EXIT_CODE
+      displayName: 'Run Authentication Tests with MCP Server'
+      env:
+        CI: true
+        NODE_ENV: test
+    
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      condition: always()
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/*test-results.xml'
+        mergeTestResults: true
+    
+    - task: PublishHtmlReport@1
+      displayName: 'Publish HTML Test Report'
+      condition: always()
+      inputs:
+        reportDir: 'outputs/reports'
+
+- stage: MultipleTestSuites
+  displayName: 'Run Multiple Test Suites'
+  dependsOn: Setup
+  condition: succeeded()
+  jobs:
+  - job: AuthenticationTests
+    displayName: 'Authentication Test Suite'
+    steps:
+    - template: steps/run-test-suite.yml
+      parameters:
+        testSuite: 'AUTH-001'
+        
+  - job: AccountManagementTests
+    displayName: 'Account Management Test Suite'  
+    steps:
+    - template: steps/run-test-suite.yml
+      parameters:
+        testSuite: 'ACCOUNT-001'

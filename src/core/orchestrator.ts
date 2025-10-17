@@ -10,6 +10,7 @@ import { TestExecutorAgent } from '../agents/test-executor.js';
 import { ResultsAnalyzerAgent } from '../agents/results-analyzer.js';
 import { TestPromptManager } from '../managers/test-prompt-manager.js';
 import EnvironmentManager from '../config/environments.js';
+import { UserStoryManager } from '../managers/user-story-manager.js';
 import type { TestResult, TestCase } from './types.js';
 import chalk from 'chalk';
 import fs from 'fs/promises';
@@ -187,3 +188,34 @@ export class TestAutomationOrchestrator {
 
 // Export as default for backward compatibility
 export default TestAutomationOrchestrator;
+
+// MAIN ENTRY POINT
+if (import.meta.url === `file://${process.argv[1]}`) {
+  (async () => {
+    const storyId = process.argv[2] || '';
+    if (!storyId) {
+      console.error('❌ No story ID provided. Usage: npm test -- AUTH-001');
+      process.exit(1);
+    }
+    const apiKey = process.env.ANTHROPIC_API_KEY || '';
+    TestAutomationOrchestrator.validateEnvironment(apiKey);
+    const orchestrator = new TestAutomationOrchestrator(apiKey);
+    const userStoryManager = new UserStoryManager();
+    // Use UserStoryManager to get story content and module
+    const allStories = await userStoryManager.getAllStories();
+    const storyObj = allStories.find(s => s.id === storyId);
+    if (!storyObj) {
+      console.error(`❌ Could not find story with ID ${storyId} in user-stories.`);
+      process.exit(1);
+    }
+    const storyContent = await userStoryManager.getStoryById(storyId);
+    await orchestrator.runPipeline(storyContent, storyObj.module, storyId)
+      .then(() => {
+        console.log('✅ All agents completed successfully.');
+      })
+      .catch((err) => {
+        console.error('❌ Pipeline failed:', err);
+        process.exit(1);
+      });
+  })();
+}

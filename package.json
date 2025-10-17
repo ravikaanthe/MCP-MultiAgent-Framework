@@ -4,24 +4,12 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "start": "npm run build && node dist/index.js",
-    "build": "tsc",
-    "dev": "tsx src/index.ts",
-    "test": "npm run build && node dist/index.js",
+    "test": "tsx src/core/orchestrator.ts",
     "validate": "tsx src/utils/validate.ts",
-    "list-stories": "npm run build && node dist/index.js --list",
-    "story": "npm run build && node dist/index.js",
-    "story-cli": "npm run build && node dist/story-cli.js",
-    "prompt-cli": "npm run build && node dist/prompt-cli.js",
-    "view-prompts": "npm run build && node dist/prompt-cli.js list",
-    "test:dev": "TEST_ENV=development tsx src/index.ts",
-    "test:staging": "TEST_ENV=staging tsx src/index.ts",
-    "test:prod": "TEST_ENV=production tsx src/index.ts",
-    "env:info": "tsx src/scripts/env-runner.ts",
-    "framework": "tsx src/index.ts",
-    "test-only": "tsx src/cli/test-executor-only.ts",
     "cleanup": "tsx src/scripts/cleanup.ts",
-    "clean": "npm run cleanup && npm run build"
+    "mcp:install": "npm install -g @modelcontextprotocol/server-playwright",
+    "mcp:start": "npx @modelcontextprotocol/server-playwright --stdio",
+    "mcp:check": "npx @modelcontextprotocol/server-playwright --version"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.24.3",

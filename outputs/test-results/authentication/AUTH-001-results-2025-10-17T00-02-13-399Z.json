@@ -1,0 +1,308 @@
+{
+  "timestamp": "2025-10-17T00-02-13-399Z",
+  "storyId": "AUTH-001",
+  "analysis": {
+    "summary": "The test results show a complete failure in the login functionality, with all 5 test cases failing. The average test duration is 1167ms, which is relatively high. The test coverage appears to be limited, focusing only on the login functionality without testing other critical areas of the application.",
+    "riskLevel": "high",
+    "passRate": 0,
+    "coverageGaps": [
+      "Account overview page access without login",
+      "Other critical functionality beyond login"
+    ],
+    "trends": [
+      "Consistent failures across all login-related test cases",
+      "Missing or invalid locators for key UI elements"
+    ],
+    "recommendations": [
+      "Improve test coverage to include more critical user flows",
+      "Investigate and fix the root causes of the login failures",
+      "Optimize test execution time and stability"
+    ],
+    "criticalIssues": [
+      "Inability to log in with valid or invalid credentials",
+      "Inability to access the account overview page without logging in"
+    ]
+  },
+  "testResults": [
+    {
+      "testName": "Login with valid credentials",
+      "status": "failed",
+      "duration": 2001,
+      "steps": [
+        {
+          "step": "Navigate to the ParaBank login page",
+          "status": "failed",
+          "error": "No URL found in navigation step",
+          "duration": 0
+        },
+        {
+          "step": "Enter valid username",
+          "status": "failed",
+          "error": "No username found in step",
+          "duration": 0
+        },
+        {
+          "step": "Enter valid password",
+          "status": "failed",
+          "error": "No password found in step",
+          "duration": 1
+        },
+        {
+          "step": "Click the 'Log In' button",
+          "status": "failed",
+          "error": "Login button not found",
+          "duration": 43
+        },
+        {
+          "step": "Verify the user is redirected to the account overview page (EXPECT: SUCCESS)",
+          "status": "failed",
+          "error": "Verification failed: Not redirected to overview page. Current URL: about:blank",
+          "duration": 0
+        },
+        {
+          "step": "Verify the URL contains '/overview.htm'",
+          "status": "failed",
+          "error": "Verification failed: Not redirected to overview page. Current URL: about:blank",
+          "duration": 0
+        },
+        {
+          "step": "Verify the 'Welcome' message is displayed with the customer name",
+          "status": "failed",
+          "error": "Verification failed: Welcome message not found",
+          "duration": 4
+        },
+        {
+          "step": "Verify the 'Accounts Overview' heading is displayed",
+          "status": "failed",
+          "error": "Verification failed: Not redirected to overview page. Current URL: about:blank",
+          "duration": 0
+        },
+        {
+          "step": "Verify the list of available accounts is displayed with account numbers and balances",
+          "status": "passed",
+          "duration": 510
+        },
+        {
+          "step": "Verify the right side navigation menu with banking options is displayed",
+          "status": "passed",
+          "duration": 510
+        },
+        {
+          "step": "Verify the 'Log Out' link is visible in the top navigation",
+          "status": "passed",
+          "duration": 503
+        }
+      ],
+      "errors": [
+        "Step 1: No URL found in navigation step",
+        "Step 2: No username found in step",
+        "Step 3: No password found in step",
+        "Step 4: Login button not found",
+        "Step 5: Verification failed: Not redirected to overview page. Current URL: about:blank",
+        "Step 6: Verification failed: Not redirected to overview page. Current URL: about:blank",
+        "Step 7: Verification failed: Welcome message not found",
+        "Step 8: Verification failed: Not redirected to overview page. Current URL: about:blank"
+      ],
+      "screenshots": [
+        "screenshot_step_4_2025-10-17T00-02-01-791Z.png",
+        "screenshot_step_5_2025-10-17T00-02-01-861Z.png",
+        "screenshot_step_6_2025-10-17T00-02-01-915Z.png",
+        "screenshot_step_7_2025-10-17T00-02-01-962Z.png",
+        "screenshot_step_8_2025-10-17T00-02-02-012Z.png",
+        "screenshot_step_9_2025-10-17T00-02-02-577Z.png",
+        "screenshot_step_10_2025-10-17T00-02-03-138Z.png",
+        "screenshot_step_11_2025-10-17T00-02-03-697Z.png"
+      ]
+    },
+    {
+      "testName": "Login with invalid username",
+      "status": "failed",
+      "duration": 735,
+      "steps": [
+        {
+          "step": "Navigate to the ParaBank login page",
+          "status": "failed",
+          "error": "No URL found in navigation step",
+          "duration": 1
+        },
+        {
+          "step": "Enter an invalid username",
+          "status": "failed",
+          "error": "No username found in step",
+          "duration": 0
+        },
+        {
+          "step": "Enter a valid password",
+          "status": "failed",
+          "error": "No password found in step",
+          "duration": 0
+        },
+        {
+          "step": "Click the 'Log In' button",
+          "status": "failed",
+          "error": "Login button not found",
+          "duration": 16
+        },
+        {
+          "step": "Verify the user is not redirected to the account overview page (EXPECT: FAILURE)",
+          "status": "failed",
+          "error": "Verification failed: Not redirected to overview page. Current URL: about:blank",
+          "duration": 0
+        },
+        {
+          "step": "Verify an error message is displayed indicating invalid credentials",
+          "status": "passed",
+          "duration": 504
+        }
+      ],
+      "errors": [
+        "Step 1: No URL found in navigation step",
+        "Step 2: No username found in step",
+        "Step 3: No password found in step",
+        "Step 4: Login button not found",
+        "Step 5: Verification failed: Not redirected to overview page. Current URL: about:blank"
+      ],
+      "screenshots": [
+        "screenshot_step_4_2025-10-17T00-02-04-770Z.png",
+        "screenshot_step_5_2025-10-17T00-02-04-831Z.png",
+        "screenshot_step_6_2025-10-17T00-02-05-393Z.png"
+      ]
+    },
+    {
+      "testName": "Login with invalid password",
+      "status": "failed",
+      "duration": 709,
+      "steps": [
+        {
+          "step": "Navigate to the ParaBank login page",
+          "status": "failed",
+          "error": "No URL found in navigation step",
+          "duration": 1
+        },
+        {
+          "step": "Enter a valid username",
+          "status": "failed",
+          "error": "No username found in step",
+          "duration": 0
+        },
+        {
+          "step": "Enter an invalid password",
+          "status": "failed",
+          "error": "No password found in step",
+          "duration": 0
+        },
+        {
+          "step": "Click the 'Log In' button",
+          "status": "failed",
+          "error": "Login button not found",
+          "duration": 12
+        },
+        {
+          "step": "Verify the user is not redirected to the account overview page (EXPECT: FAILURE)",
+          "status": "failed",
+          "error": "Verification failed: Not redirected to overview page. Current URL: about:blank",
+          "duration": 0
+        },
+        {
+          "step": "Verify an error message is displayed indicating invalid credentials",
+          "status": "passed",
+          "duration": 515
+        }
+      ],
+      "errors": [
+        "Step 1: No URL found in navigation step",
+        "Step 2: No username found in step",
+        "Step 3: No password found in step",
+        "Step 4: Login button not found",
+        "Step 5: Verification failed: Not redirected to overview page. Current URL: about:blank"
+      ],
+      "screenshots": [
+        "screenshot_step_4_2025-10-17T00-02-06-508Z.png",
+        "screenshot_step_5_2025-10-17T00-02-06-561Z.png",
+        "screenshot_step_6_2025-10-17T00-02-07-132Z.png"
+      ]
+    },
+    {
+      "testName": "Login with empty username and password",
+      "status": "failed",
+      "duration": 1753,
+      "steps": [
+        {
+          "step": "Navigate to the ParaBank login page",
+          "status": "failed",
+          "error": "No URL found in navigation step",
+          "duration": 0
+        },
+        {
+          "step": "Leave the username field empty",
+          "status": "passed",
+          "duration": 509
+        },
+        {
+          "step": "Leave the password field empty",
+          "status": "passed",
+          "duration": 512
+        },
+        {
+          "step": "Click the 'Log In' button",
+          "status": "failed",
+          "error": "Login button not found",
+          "duration": 26
+        },
+        {
+          "step": "Verify the user is not redirected to the account overview page (EXPECT: FAILURE)",
+          "status": "failed",
+          "error": "Verification failed: Not redirected to overview page. Current URL: about:blank",
+          "duration": 0
+        },
+        {
+          "step": "Verify an error message is displayed indicating both username and password are required",
+          "status": "passed",
+          "duration": 513
+        }
+      ],
+      "errors": [
+        "Step 1: No URL found in navigation step",
+        "Step 4: Login button not found",
+        "Step 5: Verification failed: Not redirected to overview page. Current URL: about:blank"
+      ],
+      "screenshots": [
+        "screenshot_step_4_2025-10-17T00-02-09-264Z.png",
+        "screenshot_step_5_2025-10-17T00-02-09-309Z.png",
+        "screenshot_step_6_2025-10-17T00-02-09-872Z.png"
+      ]
+    },
+    {
+      "testName": "Access account overview page without logging in",
+      "status": "failed",
+      "duration": 638,
+      "steps": [
+        {
+          "step": "Attempt to directly access the account overview page URL",
+          "status": "passed",
+          "duration": 507
+        },
+        {
+          "step": "Verify the user is not redirected to the account overview page (EXPECT: FAILURE)",
+          "status": "failed",
+          "error": "Verification failed: Not redirected to overview page. Current URL: about:blank",
+          "duration": 1
+        },
+        {
+          "step": "Verify the user is redirected to the login page",
+          "status": "failed",
+          "error": "Verification failed: Not redirected to overview page. Current URL: about:blank",
+          "duration": 0
+        }
+      ],
+      "errors": [
+        "Step 2: Verification failed: Not redirected to overview page. Current URL: about:blank",
+        "Step 3: Verification failed: Not redirected to overview page. Current URL: about:blank"
+      ],
+      "screenshots": [
+        "screenshot_step_2_2025-10-17T00-02-11-516Z.png",
+        "screenshot_step_3_2025-10-17T00-02-11-578Z.png"
+      ]
+    }
+  ]
+}

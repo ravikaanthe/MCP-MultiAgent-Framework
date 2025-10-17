@@ -1,20 +1,20 @@
 # AUTHENTICATION Module Test Cases
 
 ## Story: AUTH-001
-**Feature:** ParaBank Online Login  
+**Feature:** Online Banking Login  
 **Module:** authentication  
-**Generated:** 2025-10-07
+**Generated:** 2025-10-16
 
 ## Test Suite Summary
 - **Total Test Cases:** 5
-- **High Priority:** 2
-- **Medium Priority:** 3
-- **Low Priority:** 0
+- **High Priority:** 1
+- **Medium Priority:** 2
+- **Low Priority:** 2
 
 ## Requirements Analysis
-**Actions:** Navigate to ParaBank login page, Enter valid username, Enter valid password, Click Log In button  
-**Outcomes:** Redirected to account overview page, Account overview page URL contains '/overview.htm', Welcome message with customer name displayed, Accounts Overview heading displayed, Available accounts listed with account numbers and balances, Right side navigation menu with banking options displayed, Log Out link visible in top navigation  
-**Edge Cases:** Enter invalid username, Enter invalid password, Leave username or password field empty, Click Log In button with invalid credentials
+**Actions:** Navigate to ParaBank login page, Enter valid username, Enter valid password, Click the 'Log In' button  
+**Outcomes:** User is redirected to the account overview page, Account overview page URL contains '/overview.htm', Account overview page displays a 'Welcome' message with the customer name, Account overview page shows the 'Accounts Overview' heading, Available accounts are listed with account numbers and balances, Right side navigation menu displays banking options, 'Log Out' link is visible in the top navigation  
+**Edge Cases:** Enter an invalid username, Enter an invalid password, Leave the username field empty, Leave the password field empty
 
 ## Generated Test Cases
 
@@ -24,16 +24,16 @@
 
 #### Test Steps:
 1. Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm
-2. Enter valid username 'ficusroot' in the Username field
-3. Enter valid password 'katal@n@ravi' in the Password field
+2. Enter valid username 'ficusroot' in the username field
+3. Enter valid password 'katal@n@ravi' in the password field
 4. Click the 'Log In' button
-5. Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)
-6. Verify that the account overview page URL contains '/overview.htm'
-7. Verify that the welcome message with the customer name is displayed
-8. Verify that the 'Accounts Overview' heading is displayed
-9. Verify that the available accounts are listed with account numbers and balances
-10. Verify that the right-side navigation menu with banking options is displayed
-11. Verify that the 'Log Out' link is visible in the top navigation
+5. Verify user is redirected to the account overview page (EXPECT: SUCCESS)
+6. Verify the account overview page URL contains '/overview.htm'
+7. Verify the account overview page displays a 'Welcome' message with the customer name
+8. Verify the account overview page shows the 'Accounts Overview' heading
+9. Verify the available accounts are listed with account numbers and balances
+10. Verify the right side navigation menu displays banking options
+11. Verify the 'Log Out' link is visible in the top navigation
 
 #### Assertions:
 - Validations are embedded in test steps with EXPECT markers
@@ -41,7 +41,7 @@
 #### Test Data:
 ```json
 {
-  "username": "INTENTIONAL_FAILURE_USER",
+  "username": "ficusroot",
   "password": "katal@n@ravi"
 }
 ```
@@ -54,10 +54,10 @@
 
 #### Test Steps:
 1. Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm
-2. Enter invalid username 'invaliduser' in the Username field
-3. Enter valid password 'katal@n@ravi' in the Password field
+2. Enter invalid username 'invaliduser' in the username field
+3. Enter valid password 'katal@n@ravi' in the password field
 4. Click the 'Log In' button
-5. Verify that the login fails and the user is not redirected to the account overview page (EXPECT: FAILURE)
+5. Verify login fails and an error message is displayed (EXPECT: FAILURE)
 
 #### Assertions:
 - Validations are embedded in test steps with EXPECT markers
@@ -78,10 +78,10 @@
 
 #### Test Steps:
 1. Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm
-2. Enter valid username 'ficusroot' in the Username field
-3. Enter invalid password 'invalidpass' in the Password field
+2. Enter valid username 'ficusroot' in the username field
+3. Enter invalid password 'invalidpass' in the password field
 4. Click the 'Log In' button
-5. Verify that the login fails and the user is not redirected to the account overview page (EXPECT: FAILURE)
+5. Verify login fails and an error message is displayed (EXPECT: FAILURE)
 
 #### Assertions:
 - Validations are embedded in test steps with EXPECT markers
@@ -97,15 +97,15 @@
 ---
 
 
-### Test Case 4: Login with empty username and password
-**Priority:** MEDIUM
+### Test Case 4: Login with empty username field
+**Priority:** LOW
 
 #### Test Steps:
 1. Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm
-2. Leave the Username field empty
-3. Leave the Password field empty
+2. Leave the username field empty
+3. Enter valid password 'katal@n@ravi' in the password field
 4. Click the 'Log In' button
-5. Verify that the login fails and the user is not redirected to the account overview page (EXPECT: FAILURE)
+5. Verify login fails and an error message is displayed (EXPECT: FAILURE)
 
 #### Assertions:
 - Validations are embedded in test steps with EXPECT markers
@@ -114,29 +114,32 @@
 ```json
 {
   "username": "",
-  "password": ""
+  "password": "katal@n@ravi"
 }
 ```
 
 ---
 
 
-### Test Case 5: Verify 'Customer Login' section on the login page
-**Priority:** HIGH
+### Test Case 5: Login with empty password field
+**Priority:** LOW
 
 #### Test Steps:
 1. Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm
-2. Verify that the 'Customer Login' section is displayed on the left side of the page
-3. Verify that the Username field is labeled 'Username:' and accepts text input
-4. Verify that the Password field is labeled 'Password:' and masks the input
-5. Verify that the 'Log In' button is clickable when both the Username and Password fields have values
+2. Enter valid username 'ficusroot' in the username field
+3. Leave the password field empty
+4. Click the 'Log In' button
+5. Verify login fails and an error message is displayed (EXPECT: FAILURE)
 
 #### Assertions:
 - Validations are embedded in test steps with EXPECT markers
 
 #### Test Data:
 ```json
-{}
+{
+  "username": "ficusroot",
+  "password": ""
+}
 ```
 
 ---
@@ -147,25 +150,25 @@
 {
   "module": "authentication",
   "storyId": "AUTH-001",
-  "testSuite": "ParaBank Online Login Tests",
+  "testSuite": "Online Banking Login Tests",
   "testCases": [
   {
     "testName": "Login with valid credentials",
     "steps": [
       "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
-      "Enter valid username 'ficusroot' in the Username field",
-      "Enter valid password 'katal@n@ravi' in the Password field",
+      "Enter valid username 'ficusroot' in the username field",
+      "Enter valid password 'katal@n@ravi' in the password field",
       "Click the 'Log In' button",
-      "Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)",
-      "Verify that the account overview page URL contains '/overview.htm'",
-      "Verify that the welcome message with the customer name is displayed",
-      "Verify that the 'Accounts Overview' heading is displayed",
-      "Verify that the available accounts are listed with account numbers and balances",
-      "Verify that the right-side navigation menu with banking options is displayed",
-      "Verify that the 'Log Out' link is visible in the top navigation"
+      "Verify user is redirected to the account overview page (EXPECT: SUCCESS)",
+      "Verify the account overview page URL contains '/overview.htm'",
+      "Verify the account overview page displays a 'Welcome' message with the customer name",
+      "Verify the account overview page shows the 'Accounts Overview' heading",
+      "Verify the available accounts are listed with account numbers and balances",
+      "Verify the right side navigation menu displays banking options",
+      "Verify the 'Log Out' link is visible in the top navigation"
     ],
     "testData": {
-      "username": "INTENTIONAL_FAILURE_USER",
+      "username": "ficusroot",
       "password": "katal@n@ravi"
     },
     "priority": "high"
@@ -174,10 +177,10 @@
     "testName": "Login with invalid username",
     "steps": [
       "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
-      "Enter invalid username 'invaliduser' in the Username field",
-      "Enter valid password 'katal@n@ravi' in the Password field",
+      "Enter invalid username 'invaliduser' in the username field",
+      "Enter valid password 'katal@n@ravi' in the password field",
       "Click the 'Log In' button",
-      "Verify that the login fails and the user is not redirected to the account overview page (EXPECT: FAILURE)"
+      "Verify login fails and an error message is displayed (EXPECT: FAILURE)"
     ],
     "testData": {
       "username": "invaliduser",
@@ -189,10 +192,10 @@
     "testName": "Login with invalid password",
     "steps": [
       "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
-      "Enter valid username 'ficusroot' in the Username field",
-      "Enter invalid password 'invalidpass' in the Password field",
+      "Enter valid username 'ficusroot' in the username field",
+      "Enter invalid password 'invalidpass' in the password field",
       "Click the 'Log In' button",
-      "Verify that the login fails and the user is not redirected to the account overview page (EXPECT: FAILURE)"
+      "Verify login fails and an error message is displayed (EXPECT: FAILURE)"
     ],
     "testData": {
       "username": "ficusroot",
@@ -201,35 +204,38 @@
     "priority": "medium"
   },
   {
-    "testName": "Login with empty username and password",
+    "testName": "Login with empty username field",
     "steps": [
       "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
-      "Leave the Username field empty",
-      "Leave the Password field empty",
+      "Leave the username field empty",
+      "Enter valid password 'katal@n@ravi' in the password field",
       "Click the 'Log In' button",
-      "Verify that the login fails and the user is not redirected to the account overview page (EXPECT: FAILURE)"
+      "Verify login fails and an error message is displayed (EXPECT: FAILURE)"
     ],
     "testData": {
       "username": "",
-      "password": ""
+      "password": "katal@n@ravi"
     },
-    "priority": "medium"
+    "priority": "low"
   },
   {
-    "testName": "Verify 'Customer Login' section on the login page",
+    "testName": "Login with empty password field",
     "steps": [
       "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
-      "Verify that the 'Customer Login' section is displayed on the left side of the page",
-      "Verify that the Username field is labeled 'Username:' and accepts text input",
-      "Verify that the Password field is labeled 'Password:' and masks the input",
-      "Verify that the 'Log In' button is clickable when both the Username and Password fields have values"
+      "Enter valid username 'ficusroot' in the username field",
+      "Leave the password field empty",
+      "Click the 'Log In' button",
+      "Verify login fails and an error message is displayed (EXPECT: FAILURE)"
     ],
-    "testData": {},
-    "priority": "high"
+    "testData": {
+      "username": "ficusroot",
+      "password": ""
+    },
+    "priority": "low"
   }
 ]
 }
 ```
 
 ---
-*Generated by Multi-Agent Test Automation Framework on 2025-10-07T02:46:14.566Z*
+*Generated by Multi-Agent Test Automation Framework on 2025-10-16T23:39:49.558Z*

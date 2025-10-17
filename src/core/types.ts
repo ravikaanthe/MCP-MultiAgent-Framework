@@ -28,8 +28,8 @@ export interface TestResult {
   status: 'passed' | 'failed';
   duration: number;
   steps: TestStepResult[];
-  errors: string[];
-  screenshots: string[];
+  errors?: string[];
+  screenshots?: string[];
 }
 
 export interface TestAnalysis {

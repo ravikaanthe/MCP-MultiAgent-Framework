@@ -1,0 +1,73 @@
+# Reusable step template for running test suites with MCP server
+parameters:
+- name: testSuite
+  type: string
+  default: 'AUTH-001'
+- name: nodeVersion  
+  type: string
+  default: '18.x'
+
+steps:
+- task: NodeTool@0
+  displayName: 'Install Node.js'
+  inputs:
+    versionSpec: ${{ parameters.nodeVersion }}
+
+- script: npm ci
+  displayName: 'Restore Dependencies'
+
+- script: |
+    echo "=== Starting MCP Playwright Server for ${{ parameters.testSuite }} ==="
+    
+    # Start MCP server in background
+    npx @modelcontextprotocol/server-playwright --stdio > mcp-server.log 2>&1 &
+    MCP_PID=$!
+    echo "MCP Server PID: $MCP_PID" > mcp-server.pid
+    
+    # Wait for server to initialize
+    echo "Waiting for MCP server to be ready..."
+    sleep 5
+    
+    # Verify server is running
+    if kill -0 $MCP_PID 2>/dev/null; then
+        echo "✅ MCP Server is running (PID: $MCP_PID)"
+    else
+        echo "❌ MCP Server failed to start"
+        cat mcp-server.log
+        exit 1
+    fi
+    
+    # Set environment variables
+    export MCP_SERVER_RUNNING=true
+    export CI=true
+    export NODE_ENV=test
+    
+    # Run the test suite
+    echo "=== Running Test Suite: ${{ parameters.testSuite }} ==="
+    npm run test -- ${{ parameters.testSuite }}
+    TEST_EXIT_CODE=$?
+    
+    # Cleanup: Stop MCP server
+    echo "=== Cleaning up MCP Server ==="
+    if [ -f mcp-server.pid ]; then
+        MCP_PID=$(cat mcp-server.pid)
+        kill $MCP_PID || true
+        rm -f mcp-server.pid
+    fi
+    
+    # Show server logs if tests failed
+    if [ $TEST_EXIT_CODE -ne 0 ]; then
+        echo "=== MCP Server Logs ==="
+        cat mcp-server.log || echo "No server logs available"
+    fi
+    
+    # Exit with test result
+    exit $TEST_EXIT_CODE
+  displayName: 'Run ${{ parameters.testSuite }} with MCP Server'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish MCP Server Logs'
+  condition: always()
+  inputs:
+    pathToPublish: 'mcp-server.log'
+    artifactName: 'mcp-logs-${{ parameters.testSuite }}'
