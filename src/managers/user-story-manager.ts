@@ -346,23 +346,42 @@ export class UserStoryManager {
         id = this.generateStoryId(title);
       }
       
-      // Find content between ``` blocks
-      const codeBlockStart = section.indexOf('```');
-      const codeBlockEnd = section.lastIndexOf('```');
+      // NEW: Check if this is enhanced JIRA format (has ### sections) or legacy format (``` blocks)
+      const hasJiraFormat = section.includes('### User Story') || 
+                           section.includes('### Description') || 
+                           section.includes('### Acceptance Criteria');
       
-      if (codeBlockStart !== -1 && codeBlockEnd !== -1 && codeBlockStart !== codeBlockEnd) {
-        const content = section
-          .substring(codeBlockStart + 3, codeBlockEnd)
-          .trim();
+      let storyContent: string;
+      
+      if (hasJiraFormat) {
+        // Enhanced JIRA format: Extract everything from the story section (excluding title line)
+        // This includes all metadata, description, acceptance criteria, etc.
+        storyContent = section.substring(section.indexOf('\n') + 1).trim();
         
-        if (content) {
-          stories.push({ 
-            id, 
-            title, 
-            content,
-            module: moduleName 
-          });
+        // Remove separator lines (---) between stories for cleaner content
+        storyContent = storyContent.replace(/^---\s*$/gm, '').trim();
+      } else {
+        // Legacy format: Extract content between ``` blocks
+        const codeBlockStart = section.indexOf('```');
+        const codeBlockEnd = section.lastIndexOf('```');
+        
+        if (codeBlockStart !== -1 && codeBlockEnd !== -1 && codeBlockStart !== codeBlockEnd) {
+          storyContent = section
+            .substring(codeBlockStart + 3, codeBlockEnd)
+            .trim();
+        } else {
+          // No code blocks found, skip this story
+          return;
         }
+      }
+      
+      if (storyContent) {
+        stories.push({ 
+          id, 
+          title, 
+          content: storyContent,
+          module: moduleName 
+        });
       }
     });
     

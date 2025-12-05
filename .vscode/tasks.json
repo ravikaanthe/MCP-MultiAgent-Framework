@@ -14,7 +14,7 @@
 			"label": "Start MCP Playwright Server",
 			"type": "shell",
 			"command": "npx",
-			"args": ["@modelcontextprotocol/server-playwright", "--stdio"],
+			"args": ["tsx", "src/mcp/playwright-mcp-server.ts"],
 			"group": "build",
 			"isBackground": true,
 			"presentation": {
@@ -25,16 +25,13 @@
 				"showReuseMessage": true,
 				"clear": false
 			},
-			"problemMatcher": [],
-			"runOptions": {
-				"runOn": "folderOpen"
-			}
+			"problemMatcher": []
 		},
 		{
-			"label": "Install MCP Playwright Server",
+			"label": "Install MCP Dependencies",
 			"type": "shell",
 			"command": "npm",
-			"args": ["install", "-g", "@modelcontextprotocol/server-playwright"],
+			"args": ["install", "@modelcontextprotocol/sdk", "playwright"],
 			"group": "build",
 			"isBackground": false,
 			"presentation": {

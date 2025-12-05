@@ -1,0 +1,261 @@
+[
+  {
+    "testName": "Login with valid credentials",
+    "status": "failed",
+    "duration": 182,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page",
+        "status": "failed",
+        "duration": 0,
+        "error": "Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+      },
+      {
+        "step": "Enter valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the 'Welcome' message is displayed with the customer name (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the 'Accounts Overview' heading is displayed (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the available accounts are listed with account numbers and balances (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the right side navigation menu displays banking options (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the 'Log Out' link is visible in the top navigation (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      }
+    ],
+    "errors": [
+      "Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\"",
+      "Step 5: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 6: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 7: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 8: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 9: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 10: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid username",
+    "status": "failed",
+    "duration": 62,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page",
+        "status": "failed",
+        "duration": 0,
+        "error": "Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+      },
+      {
+        "step": "Enter invalid username 'invaliduser'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify login fails and error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid password",
+    "status": "failed",
+    "duration": 63,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page",
+        "status": "failed",
+        "duration": 0,
+        "error": "Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+      },
+      {
+        "step": "Enter valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter invalid password 'invalidpass'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify login fails and error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with empty username",
+    "status": "failed",
+    "duration": 46,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page",
+        "status": "failed",
+        "duration": 0,
+        "error": "Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+      },
+      {
+        "step": "Leave the username field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify login fails and error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with empty password",
+    "status": "failed",
+    "duration": 59,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page",
+        "status": "failed",
+        "duration": 0,
+        "error": "Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+      },
+      {
+        "step": "Enter valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the password field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify login fails and error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with locked account",
+    "status": "failed",
+    "duration": 60,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page",
+        "status": "failed",
+        "duration": 0,
+        "error": "Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+      },
+      {
+        "step": "Enter a valid username for a locked account",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the correct password for the locked account",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify login fails and error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: \"Navigate to the ParaBank login page\""
+    ],
+    "screenshots": []
+  }
+]

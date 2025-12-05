@@ -32,10 +32,12 @@ export interface PipelineResults {
 export class TestAutomationOrchestrator {
   private apiKey: string;
   private promptManager: TestPromptManager;
+  private headedMode: boolean;
 
-  constructor(apiKey: string) {
+  constructor(apiKey: string, options: { headed?: boolean } = {}) {
     this.apiKey = apiKey;
     this.promptManager = new TestPromptManager();
+    this.headedMode = options.headed || false;
   }
 
   /**
@@ -62,7 +64,7 @@ export class TestAutomationOrchestrator {
       // Initialize all agents
       const storyAnalyst = new StoryAnalystAgent(this.apiKey);
       const testGenerator = new TestGeneratorAgent(this.apiKey);
-      const testExecutor = new TestExecutorAgent();
+      const testExecutor = new TestExecutorAgent({ headed: this.headedMode });
       const resultsAnalyzer = new ResultsAnalyzerAgent(this.apiKey);
 
       // Agent 1: Story Analysis
