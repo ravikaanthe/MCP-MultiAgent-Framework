@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results Report - AUTH-001</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { text-align: center; border-bottom: 2px solid #007acc; padding-bottom: 20px; margin-bottom: 30px; }
+        .header h1 { color: #007acc; margin: 0; }
+        .header .story-id { color: #666; font-size: 18px; margin-top: 5px; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .metric-card { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #007acc; }
+        .metric-value { font-size: 2em; font-weight: bold; margin: 10px 0; }
+        .metric-label { color: #666; font-size: 14px; }
+        .pass-rate { color: #28a745; }
+        .risk-level { color: #ffc107; }
+        .section { margin: 30px 0; }
+        .section h2 { color: #333; border-bottom: 1px solid #dee2e6; padding-bottom: 10px; }
+        .test-item { background: #f8f9fa; margin: 10px 0; padding: 15px; border-radius: 5px; border-left: 4px solid; }
+        .test-passed { border-left-color: #28a745; }
+        .test-failed { border-left-color: #dc3545; }
+        .test-name { font-weight: bold; margin-bottom: 5px; }
+        .test-details { color: #666; font-size: 14px; }
+        .test-errors { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; padding: 10px; margin-top: 10px; }
+        .error-item { color: #856404; margin: 5px 0; }
+        .test-steps { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 15px; margin-top: 10px; }
+        .test-steps h4 { margin: 0 0 10px 0; color: #495057; font-size: 14px; }
+        .step-item { margin: 8px 0; padding: 8px 12px; background: white; border-radius: 4px; border-left: 3px solid; font-family: 'Courier New', monospace; font-size: 13px; }
+        .step-passed { border-left-color: #28a745; }
+        .step-failed { border-left-color: #dc3545; background: #fff5f5; }
+        .step-status { font-weight: bold; margin-right: 8px; }
+        .step-duration { color: #666; font-size: 11px; float: right; }
+        .step-error { color: #dc3545; font-size: 12px; margin-top: 4px; font-style: italic; }
+        .summary-text { background: #e3f2fd; padding: 20px; border-radius: 8px; border-left: 4px solid #007acc; }
+        .list-item { margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 4px; }
+        .timestamp { color: #666; font-size: 12px; text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #dee2e6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Test Execution Report</h1>
+            <div class="story-id">Story: AUTH-001</div>
+        </div>
+
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-value pass-rate">83.3%</div>
+                <div class="metric-label">Pass Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">6</div>
+                <div class="metric-label">Total Tests</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" style="color: #28a745;">5</div>
+                <div class="metric-label">Passed</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" style="color: #dc3545;">1</div>
+                <div class="metric-label">Failed</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value risk-level">MEDIUM</div>
+                <div class="metric-label">Risk Level</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 Summary</h2>
+            <div class="summary-text">The test results indicate that 5 out of 6 tests passed, resulting in an 83.3% pass rate. The average duration of the tests is 6723ms. The failed test case, 'Login with valid credentials', encountered issues in 3 out of 9 steps, specifically related to the expected page redirection and expected messages not being found.</div>
+        </div>
+
+        <div class="section">
+            <h2>🧪 Test Results</h2>
+            
+                <div class="test-item test-failed">
+                    <div class="test-name">
+                        ❌ Login with valid credentials
+                    </div>
+                    <div class="test-details">
+                        Duration: 11002ms | Steps: 9 | Status: FAILED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 1:</strong> Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm
+                                    <span class="step-duration">4295ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Enter valid username 'ficusroot'
+                                    <span class="step-duration">1251ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 3:</strong> Enter valid password 'katal@n@ravi'
+                                    <span class="step-duration">1054ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 4:</strong> Click the 'Log In' button
+                                    <span class="step-duration">3309ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 5:</strong> Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)
+                                    <span class="step-duration">30ms</span>
+                                    <div class="step-error">Error: Expected to be redirected to overview page</div>
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 6:</strong> Verify that the welcome message with the customer name is displayed
+                                    <span class="step-duration">9ms</span>
+                                    <div class="step-error">Error: Expected "Welcome" message not found</div>
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 7:</strong> Verify that the Accounts Overview section is displayed
+                                    <span class="step-duration">8ms</span>
+                                    <div class="step-error">Error: Expected "Accounts Overview" heading not found</div>
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 8:</strong> Verify that the available accounts are listed with account numbers and balances
+                                    <span class="step-duration">510ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 9:</strong> Verify that the right-side navigation menu is displayed with banking options
+                                    <span class="step-duration">517ms</span>
+                                    
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                        <div class="test-errors">
+                            <strong>⚠️ Test-Level Errors:</strong>
+                            <div class="error-item">❌ Step 5: Expected to be redirected to overview page; Step 6: Expected "Welcome" message not found; Step 7: Expected "Accounts Overview" heading not found</div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-item test-passed">
+                    <div class="test-name">
+                        ✅ Login with invalid username
+                    </div>
+                    <div class="test-details">
+                        Duration: 8017ms | Steps: 5 | Status: PASSED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 1:</strong> Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm
+                                    <span class="step-duration">2183ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Enter invalid username 'invaliduser'
+                                    <span class="step-duration">1076ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 3:</strong> Enter valid password 'katal@n@ravi'
+                                    <span class="step-duration">1046ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 4:</strong> Click the 'Log In' button
+                                    <span class="step-duration">3179ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 5:</strong> Verify that the login is unsuccessful and an error message is displayed (EXPECT: FAILURE)
+                                    <span class="step-duration">529ms</span>
+                                    
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            
+                <div class="test-item test-passed">
+                    <div class="test-name">
+                        ✅ Login with invalid password
+                    </div>
+                    <div class="test-details">
+                        Duration: 8095ms | Steps: 5 | Status: PASSED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 1:</strong> Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm
+                                    <span class="step-duration">2186ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Enter valid username 'ficusroot'
+                                    <span class="step-duration">1058ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 3:</strong> Enter invalid password 'invalidpass'
+                                    <span class="step-duration">1045ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 4:</strong> Click the 'Log In' button
+                                    <span class="step-duration">3261ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 5:</strong> Verify that the login is unsuccessful and an error message is displayed (EXPECT: FAILURE)
+                                    <span class="step-duration">538ms</span>
+                                    
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            
+                <div class="test-item test-passed">
+                    <div class="test-name">
+                        ✅ Login with empty username and password
+                    </div>
+                    <div class="test-details">
+                        Duration: 6901ms | Steps: 5 | Status: PASSED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 1:</strong> Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm
+                                    <span class="step-duration">2161ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Leave the username field empty
+                                    <span class="step-duration">514ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 3:</strong> Leave the password field empty
+                                    <span class="step-duration">513ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 4:</strong> Click the 'Log In' button
+                                    <span class="step-duration">3182ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 5:</strong> Verify that the login is unsuccessful and an error message is displayed (EXPECT: FAILURE)
+                                    <span class="step-duration">527ms</span>
+                                    
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            
+                <div class="test-item test-passed">
+                    <div class="test-name">
+                        ✅ Attempt to access account overview page without login
+                    </div>
+                    <div class="test-details">
+                        Duration: 1031ms | Steps: 2 | Status: PASSED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 1:</strong> Navigate directly to the account overview page at https://parabank.parasoft.com/parabank/overview.htm
+                                    <span class="step-duration">511ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Verify that the user is redirected to the login page and unable to access the account overview page (EXPECT: FAILURE)
+                                    <span class="step-duration">518ms</span>
+                                    
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            
+                <div class="test-item test-passed">
+                    <div class="test-name">
+                        ✅ Verify login page accessibility and input validation
+                    </div>
+                    <div class="test-details">
+                        Duration: 5290ms | Steps: 7 | Status: PASSED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 1:</strong> Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm
+                                    <span class="step-duration">2168ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Verify that the login page is accessible
+                                    <span class="step-duration">529ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 3:</strong> Verify that the username and password fields are properly labeled
+                                    <span class="step-duration">515ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 4:</strong> Verify that the password field masks the input
+                                    <span class="step-duration">517ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 5:</strong> Verify that the login button is clickable when both fields have values
+                                    <span class="step-duration">503ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 6:</strong> Verify that the login completes within 2 seconds
+                                    <span class="step-duration">518ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 7:</strong> Verify that the password is encrypted in transit
+                                    <span class="step-duration">515ms</span>
+                                    
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                </div>
+            
+        </div>
+
+        
+            <div class="section">
+                <h2>🔍 Coverage Gaps</h2>
+                <div class="list-item">⚠️ Scenarios related to successful login with valid credentials</div>
+            </div>
+        
+
+        
+            <div class="section">
+                <h2>🚨 Critical Issues</h2>
+                <div class="list-item" style="background: #fff3cd; border-left: 4px solid #dc3545;">🚨 Issues with the 'Login with valid credentials' test case that impact critical functionality</div>
+            </div>
+        
+
+        
+            <div class="section">
+                <h2>💡 Recommendations</h2>
+                <div class="list-item" style="background: #e3f2fd; border-left: 4px solid #007acc;">💡 Investigate and fix the issues in the 'Login with valid credentials' test case</div><div class="list-item" style="background: #e3f2fd; border-left: 4px solid #007acc;">💡 Expand test coverage to include more scenarios for successful login</div>
+            </div>
+        
+
+        <div class="timestamp">
+            Generated on 2025-12-05T21:33:40.283Z
+        </div>
+    </div>
+</body>
+</html>

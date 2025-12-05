@@ -1,0 +1,176 @@
+[
+  {
+    "testName": "Login with valid credentials",
+    "status": "failed",
+    "duration": 2596,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter a valid username",
+        "status": "failed",
+        "duration": 0,
+        "error": "Test step requires username but testData.username is not provided in test case: Login with valid credentials"
+      },
+      {
+        "step": "Enter a valid password",
+        "status": "failed",
+        "duration": 0,
+        "error": "Test step requires password but testData.password is not provided in test case: Login with valid credentials"
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify that the welcome message with the customer name is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the Accounts Overview section is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the available accounts are listed with their account numbers and balances",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the right-side navigation menu with banking options is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Log Out' link is visible in the top navigation",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 2: Test step requires username but testData.username is not provided in test case: Login with valid credentials",
+      "Step 3: Test step requires password but testData.password is not provided in test case: Login with valid credentials",
+      "Step 5: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid username",
+    "status": "failed",
+    "duration": 1917,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter an invalid username",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter a valid password",
+        "status": "failed",
+        "duration": 0,
+        "error": "Test step requires password but testData.password is not provided in test case: Login with invalid username"
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the login fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 3: Test step requires password but testData.password is not provided in test case: Login with invalid username"
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid password",
+    "status": "failed",
+    "duration": 1861,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter a valid username",
+        "status": "failed",
+        "duration": 0,
+        "error": "Test step requires username but testData.username is not provided in test case: Login with invalid password"
+      },
+      {
+        "step": "Enter an invalid password",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the login fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 2: Test step requires username but testData.username is not provided in test case: Login with invalid password"
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with empty username and password fields",
+    "status": "passed",
+    "duration": 1228,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the username field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the password field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the login fails and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  }
+]

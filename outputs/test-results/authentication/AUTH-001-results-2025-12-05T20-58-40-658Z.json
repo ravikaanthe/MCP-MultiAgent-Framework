@@ -1,0 +1,195 @@
+[
+  {
+    "testName": "Login with valid credentials",
+    "status": "failed",
+    "duration": 3149,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the 'Welcome' message with the customer name is displayed (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the 'Accounts Overview' heading is present (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the available accounts are listed with account numbers and balances (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the right side navigation menu options are displayed (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the 'Log Out' link is visible (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      }
+    ],
+    "errors": [
+      "Step 5: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 6: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 7: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 8: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 9: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 10: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid username",
+    "status": "passed",
+    "duration": 2519,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter invalid username 'invaliduser'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter valid password 'katal@n@ravi'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the login fails and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid password",
+    "status": "passed",
+    "duration": 2274,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter valid username 'ficusroot'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter invalid password 'invalidpass'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the login fails and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with empty username and password",
+    "status": "passed",
+    "duration": 1206,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the username field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the password field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the login fails and the user remains on the login page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login when ParaBank is not accessible",
+    "status": "passed",
+    "duration": 680,
+    "steps": [
+      {
+        "step": "Navigate to an invalid ParaBank URL (e.g., 'https://parabank.parasoft.com/parabank/invalid')",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the application is not accessible and an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  }
+]

@@ -1,0 +1,202 @@
+[
+  {
+    "testName": "Navigate to ParaBank login page",
+    "status": "passed",
+    "duration": 918,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the 'Customer Login' section is displayed on the left side (EXPECT: SUCCESS)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with valid credentials",
+    "status": "failed",
+    "duration": 93,
+    "steps": [
+      {
+        "step": "Enter a valid username in the 'Username:' field",
+        "status": "failed",
+        "duration": 0,
+        "error": "Test step requires username but testData.username is not provided in test case: Login with valid credentials"
+      },
+      {
+        "step": "Enter a valid password in the 'Password:' field",
+        "status": "failed",
+        "duration": 0,
+        "error": "Test step requires password but testData.password is not provided in test case: Login with valid credentials"
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the URL contains '/overview.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the 'Welcome' message is displayed with the customer name (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the 'Accounts Overview' heading is displayed (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the available accounts are listed with account numbers and balances (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify the right side navigation menu is displayed with the banking options (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      }
+    ],
+    "errors": [
+      "Step 1: Test step requires username but testData.username is not provided in test case: Login with valid credentials",
+      "Step 2: Test step requires password but testData.password is not provided in test case: Login with valid credentials",
+      "Step 4: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 6: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 7: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 8: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.",
+      "Step 9: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid username",
+    "status": "failed",
+    "duration": 26,
+    "steps": [
+      {
+        "step": "Enter an invalid username in the 'Username:' field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter a valid password in the 'Password:' field",
+        "status": "failed",
+        "duration": 0,
+        "error": "Test step requires password but testData.password is not provided in test case: Login with invalid username"
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 2: Test step requires password but testData.password is not provided in test case: Login with invalid username"
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid password",
+    "status": "failed",
+    "duration": 22,
+    "steps": [
+      {
+        "step": "Enter a valid username in the 'Username:' field",
+        "status": "failed",
+        "duration": 0,
+        "error": "Test step requires username but testData.username is not provided in test case: Login with invalid password"
+      },
+      {
+        "step": "Enter an invalid password in the 'Password:' field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 1: Test step requires username but testData.username is not provided in test case: Login with invalid password"
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with empty username and password",
+    "status": "passed",
+    "duration": 27,
+    "steps": [
+      {
+        "step": "Leave the 'Username:' field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the 'Password:' field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify an error message is displayed (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Attempt to login when ParaBank is not accessible",
+    "status": "passed",
+    "duration": 15,
+    "steps": [
+      {
+        "step": "Navigate to an invalid ParaBank URL",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify the application is not accessible (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  }
+]

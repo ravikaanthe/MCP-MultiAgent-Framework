@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results Report - AUTH-001</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { text-align: center; border-bottom: 2px solid #007acc; padding-bottom: 20px; margin-bottom: 30px; }
+        .header h1 { color: #007acc; margin: 0; }
+        .header .story-id { color: #666; font-size: 18px; margin-top: 5px; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .metric-card { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #007acc; }
+        .metric-value { font-size: 2em; font-weight: bold; margin: 10px 0; }
+        .metric-label { color: #666; font-size: 14px; }
+        .pass-rate { color: #dc3545; }
+        .risk-level { color: #dc3545; }
+        .section { margin: 30px 0; }
+        .section h2 { color: #333; border-bottom: 1px solid #dee2e6; padding-bottom: 10px; }
+        .test-item { background: #f8f9fa; margin: 10px 0; padding: 15px; border-radius: 5px; border-left: 4px solid; }
+        .test-passed { border-left-color: #28a745; }
+        .test-failed { border-left-color: #dc3545; }
+        .test-name { font-weight: bold; margin-bottom: 5px; }
+        .test-details { color: #666; font-size: 14px; }
+        .test-errors { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; padding: 10px; margin-top: 10px; }
+        .error-item { color: #856404; margin: 5px 0; }
+        .test-steps { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 15px; margin-top: 10px; }
+        .test-steps h4 { margin: 0 0 10px 0; color: #495057; font-size: 14px; }
+        .step-item { margin: 8px 0; padding: 8px 12px; background: white; border-radius: 4px; border-left: 3px solid; font-family: 'Courier New', monospace; font-size: 13px; }
+        .step-passed { border-left-color: #28a745; }
+        .step-failed { border-left-color: #dc3545; background: #fff5f5; }
+        .step-status { font-weight: bold; margin-right: 8px; }
+        .step-duration { color: #666; font-size: 11px; float: right; }
+        .step-error { color: #dc3545; font-size: 12px; margin-top: 4px; font-style: italic; }
+        .summary-text { background: #e3f2fd; padding: 20px; border-radius: 8px; border-left: 4px solid #007acc; }
+        .list-item { margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 4px; }
+        .timestamp { color: #666; font-size: 12px; text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #dee2e6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Test Execution Report</h1>
+            <div class="story-id">Story: AUTH-001</div>
+        </div>
+
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-value pass-rate">0.0%</div>
+                <div class="metric-label">Pass Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">5</div>
+                <div class="metric-label">Total Tests</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" style="color: #28a745;">0</div>
+                <div class="metric-label">Passed</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" style="color: #dc3545;">5</div>
+                <div class="metric-label">Failed</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value risk-level">HIGH</div>
+                <div class="metric-label">Risk Level</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 Summary</h2>
+            <div class="summary-text">The test results show that all 5 tests have failed, resulting in a 0% pass rate. The average test duration is very high at 42,014 milliseconds, indicating potential performance issues. The failures are spread across various test cases, including login with valid credentials, invalid username, invalid password, empty username/password, and attempts to access the login page when already logged in.</div>
+        </div>
+
+        <div class="section">
+            <h2>🧪 Test Results</h2>
+            
+                <div class="test-item test-failed">
+                    <div class="test-name">
+                        ❌ Login with valid credentials
+                    </div>
+                    <div class="test-details">
+                        Duration: 62996ms | Steps: 9 | Status: FAILED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 1:</strong> Navigate to the ParaBank login page
+                                    <span class="step-duration">0ms</span>
+                                    <div class="step-error">Error: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: "Navigate to the ParaBank login page"</div>
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Enter the valid username 'ficusroot' in the username field
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 3:</strong> Enter the valid password 'katal@n@ravi' in the password field
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 4:</strong> Click the 'Log In' button
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 5:</strong> Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)
+                                    <span class="step-duration">100ms</span>
+                                    <div class="step-error">Error: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div>
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 6:</strong> Verify that the welcome message with the customer name is displayed (EXPECT: SUCCESS)
+                                    <span class="step-duration">100ms</span>
+                                    <div class="step-error">Error: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div>
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 7:</strong> Verify that the Accounts Overview section is displayed (EXPECT: SUCCESS)
+                                    <span class="step-duration">100ms</span>
+                                    <div class="step-error">Error: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div>
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 8:</strong> Verify that the available accounts are listed with account numbers and balances (EXPECT: SUCCESS)
+                                    <span class="step-duration">100ms</span>
+                                    <div class="step-error">Error: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div>
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 9:</strong> Verify that the right side navigation menu displays the banking options (EXPECT: SUCCESS)
+                                    <span class="step-duration">100ms</span>
+                                    <div class="step-error">Error: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div>
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                        <div class="test-errors">
+                            <strong>⚠️ Test-Level Errors:</strong>
+                            <div class="error-item">❌ Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: "Navigate to the ParaBank login page"</div><div class="error-item">❌ Step 5: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div><div class="error-item">❌ Step 6: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div><div class="error-item">❌ Step 7: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div><div class="error-item">❌ Step 8: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div><div class="error-item">❌ Step 9: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-item test-failed">
+                    <div class="test-name">
+                        ❌ Login with invalid username
+                    </div>
+                    <div class="test-details">
+                        Duration: 61586ms | Steps: 5 | Status: FAILED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 1:</strong> Navigate to the ParaBank login page
+                                    <span class="step-duration">0ms</span>
+                                    <div class="step-error">Error: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: "Navigate to the ParaBank login page"</div>
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Enter the invalid username 'invaliduser' in the username field
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 3:</strong> Enter the valid password 'katal@n@ravi' in the password field
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 4:</strong> Click the 'Log In' button
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 5:</strong> Verify that the login fails and an error message is displayed (EXPECT: FAILURE)
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                        <div class="test-errors">
+                            <strong>⚠️ Test-Level Errors:</strong>
+                            <div class="error-item">❌ Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: "Navigate to the ParaBank login page"</div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-item test-failed">
+                    <div class="test-name">
+                        ❌ Login with invalid password
+                    </div>
+                    <div class="test-details">
+                        Duration: 61591ms | Steps: 5 | Status: FAILED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 1:</strong> Navigate to the ParaBank login page
+                                    <span class="step-duration">0ms</span>
+                                    <div class="step-error">Error: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: "Navigate to the ParaBank login page"</div>
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Enter the valid username 'ficusroot' in the username field
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 3:</strong> Enter the invalid password 'invalidpass' in the password field
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 4:</strong> Click the 'Log In' button
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 5:</strong> Verify that the login fails and an error message is displayed (EXPECT: FAILURE)
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                        <div class="test-errors">
+                            <strong>⚠️ Test-Level Errors:</strong>
+                            <div class="error-item">❌ Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: "Navigate to the ParaBank login page"</div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-item test-failed">
+                    <div class="test-name">
+                        ❌ Login with empty username or password
+                    </div>
+                    <div class="test-details">
+                        Duration: 1071ms | Steps: 9 | Status: FAILED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 1:</strong> Navigate to the ParaBank login page
+                                    <span class="step-duration">0ms</span>
+                                    <div class="step-error">Error: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: "Navigate to the ParaBank login page"</div>
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Leave the username field empty
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 3:</strong> Enter the valid password 'katal@n@ravi' in the password field
+                                    <span class="step-duration">0ms</span>
+                                    <div class="step-error">Error: Test step requires password but testData.password is not provided in test case: Login with empty username or password</div>
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 4:</strong> Click the 'Log In' button
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 5:</strong> Verify that the login fails and an error message is displayed (EXPECT: FAILURE)
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 6:</strong> Clear the password field
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 7:</strong> Enter the valid username 'ficusroot' in the username field
+                                    <span class="step-duration">0ms</span>
+                                    <div class="step-error">Error: Test step requires username but testData.username is not provided in test case: Login with empty username or password</div>
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 8:</strong> Click the 'Log In' button
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 9:</strong> Verify that the login fails and an error message is displayed (EXPECT: FAILURE)
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                        <div class="test-errors">
+                            <strong>⚠️ Test-Level Errors:</strong>
+                            <div class="error-item">❌ Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: "Navigate to the ParaBank login page"</div><div class="error-item">❌ Step 3: Test step requires password but testData.password is not provided in test case: Login with empty username or password</div><div class="error-item">❌ Step 7: Test step requires username but testData.username is not provided in test case: Login with empty username or password</div>
+                        </div>
+                    
+                </div>
+            
+                <div class="test-item test-failed">
+                    <div class="test-name">
+                        ❌ Attempt to access the login page when already logged in
+                    </div>
+                    <div class="test-details">
+                        Duration: 22826ms | Steps: 7 | Status: FAILED
+                    </div>
+                    
+                    
+                        <div class="test-steps">
+                            <h4>📋 Test Steps Executed:</h4>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 1:</strong> Navigate to the ParaBank login page
+                                    <span class="step-duration">0ms</span>
+                                    <div class="step-error">Error: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: "Navigate to the ParaBank login page"</div>
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 2:</strong> Enter the valid username 'ficusroot' in the username field
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 3:</strong> Enter the valid password 'katal@n@ravi' in the password field
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 4:</strong> Click the 'Log In' button
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-failed">
+                                    <span class="step-status">❌</span>
+                                    <strong>Step 5:</strong> Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)
+                                    <span class="step-duration">100ms</span>
+                                    <div class="step-error">Error: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div>
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 6:</strong> Navigate back to the ParaBank login page
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                                <div class="step-item step-passed">
+                                    <span class="step-status">✅</span>
+                                    <strong>Step 7:</strong> Verify that the user is automatically redirected to the account overview page (EXPECT: FAILURE)
+                                    <span class="step-duration">100ms</span>
+                                    
+                                </div>
+                            
+                        </div>
+                    
+                    
+                    
+                        <div class="test-errors">
+                            <strong>⚠️ Test-Level Errors:</strong>
+                            <div class="error-item">❌ Step 1: Navigation step requires URL in test data (baseUrl or url property) or in step description. Step: "Navigate to the ParaBank login page"</div><div class="error-item">❌ Step 5: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page.</div>
+                        </div>
+                    
+                </div>
+            
+        </div>
+
+        
+            <div class="section">
+                <h2>🔍 Coverage Gaps</h2>
+                <div class="list-item">⚠️ Positive test scenarios for successful login</div><div class="list-item">⚠️ Negative test scenarios for invalid credentials</div><div class="list-item">⚠️ Boundary conditions for username and password fields</div><div class="list-item">⚠️ Test cases for redirecting authenticated users from the login page</div>
+            </div>
+        
+
+        
+            <div class="section">
+                <h2>🚨 Critical Issues</h2>
+                <div class="list-item" style="background: #fff3cd; border-left: 4px solid #dc3545;">🚨 Inability to execute critical login functionality, indicating a high-risk area in the application</div><div class="list-item" style="background: #fff3cd; border-left: 4px solid #dc3545;">🚨 Lack of coverage for fundamental login use cases, leaving important functionality untested</div>
+            </div>
+        
+
+        
+            <div class="section">
+                <h2>💡 Recommendations</h2>
+                <div class="list-item" style="background: #e3f2fd; border-left: 4px solid #007acc;">💡 Review and update the test suite to include comprehensive test scenarios, covering positive and negative cases for login functionality</div><div class="list-item" style="background: #e3f2fd; border-left: 4px solid #007acc;">💡 Ensure all navigation steps have the required URL information, either in the test data or step description</div><div class="list-item" style="background: #e3f2fd; border-left: 4px solid #007acc;">💡 Investigate and address the root causes of authentication failures, ensuring successful login and redirection to the authenticated page</div><div class="list-item" style="background: #e3f2fd; border-left: 4px solid #007acc;">💡 Provide complete test data, including valid and invalid username and password, for all relevant test cases</div><div class="list-item" style="background: #e3f2fd; border-left: 4px solid #007acc;">💡 Optimize test performance, looking into potential bottlenecks that contribute to the high average test duration</div>
+            </div>
+        
+
+        <div class="timestamp">
+            Generated on 2025-12-05T18:27:49.183Z
+        </div>
+    </div>
+</body>
+</html>

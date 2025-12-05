@@ -1,7 +1,43 @@
 /**
  * MCP Playwright Server
- * Provides Playwright browser automation through Model Context Protocol
- * Supports both headed and headless modes via configuration
+ * Provides Playwright browser automation through Model Context Prot        {
+          name: 'playwright_type',
+          description: 'Type text into an input field',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              selector: {
+                type: 'string',
+                description: 'CSS selector for the input element',
+              },
+              text: {
+                type: 'string',
+                description: 'Text to type',
+              },
+            },
+            required: ['selector', 'text'],
+          },
+        },
+        {
+          name: 'playwright_select',
+          description: 'Select an option from a dropdown',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              selector: {
+                type: 'string',
+                description: 'CSS selector for the select element',
+              },
+              value: {
+                type: 'string',
+                description: 'Value to select',
+              },
+            },
+            required: ['selector', 'value'],
+          },
+        },
+        {
+          name: 'playwright_screenshot',th headed and headless modes via configuration
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
@@ -255,6 +291,17 @@ class PlaywrightMCPServer {
                 {
                   type: 'text',
                   text: `Typed "${args.text}" into ${args.selector}`,
+                },
+              ],
+            };
+
+          case 'playwright_select':
+            await this.page!.selectOption(args.selector as string, args.value as string);
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: `Selected "${args.value}" from ${args.selector}`,
                 },
               ],
             };

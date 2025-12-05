@@ -47,16 +47,10 @@ Thumbs.db
 logs/
 *.log
 
-# Old/deprecated files that should never be committed
-complete-framework-*.ts
-demo-*.ts
-execute-*.ts
-generate-*.ts
-run-*.ts
-test-*.ts
-user-stories.md
-test-parabank-*.md
-*.sh
+# Old/deprecated files that should never be committed (REMOVED - these patterns were too broad)
+# complete-framework-*.ts
+# demo-*.ts
+# If specific old files need to be ignored, add them by full name instead of wildcards
 
 # Old generated directories
 generated-prompts/

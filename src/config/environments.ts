@@ -37,31 +37,36 @@ export interface EnvironmentConfig {
 
 /**
  * 🏦 ParaBank Application Configuration
+ * Credentials should be configured via environment variables:
+ * - VALID_USERNAME, VALID_PASSWORD
+ * - INVALID_USERNAME, INVALID_PASSWORD
  */
 const parabankConfig: ApplicationConfig = {
   name: "ParaBank Demo",
-  baseUrl: "https://parabank.parasoft.com/parabank",
-  loginUrl: "https://parabank.parasoft.com/parabank/index.htm",
-  openAccountUrl: "https://parabank.parasoft.com/parabank/openaccount.htm",
-  overviewUrl: "https://parabank.parasoft.com/parabank/overview.htm",
-  transferUrl: "https://parabank.parasoft.com/parabank/transfer.htm",
+  baseUrl: process.env.BASE_URL || "https://parabank.parasoft.com/parabank",
+  loginUrl: process.env.LOGIN_URL || "https://parabank.parasoft.com/parabank/index.htm",
+  openAccountUrl: process.env.OPEN_ACCOUNT_URL || "https://parabank.parasoft.com/parabank/openaccount.htm",
+  overviewUrl: process.env.OVERVIEW_URL || "https://parabank.parasoft.com/parabank/overview.htm",
+  transferUrl: process.env.TRANSFER_URL || "https://parabank.parasoft.com/parabank/transfer.htm",
   credentials: {
     valid: [
-      { username: "ficusroot", password: "katal@n@ravi" },
-      { username: "admin", password: "admin" },
-      { username: "testuser", password: "testpass" }
+      { 
+        username: process.env.VALID_USERNAME || "", 
+        password: process.env.VALID_PASSWORD || "" 
+      }
     ],
     invalid: [
-      { username: "invaliduser", password: "invalidpass" },
-      { username: "wronguser", password: "wrongpass" },
-      { username: "baduser", password: "badpass" }
+      { 
+        username: process.env.INVALID_USERNAME || "invaliduser", 
+        password: process.env.INVALID_PASSWORD || "invalidpass" 
+      }
     ]
   },
   selectors: {
-    username: 'input[name="username"]',
-    password: 'input[name="password"]',
-    loginButton: 'input[type="submit"][value="Log In"]',
-    logoutButton: 'a[href="logout.htm"]'
+    username: process.env.USERNAME_SELECTOR || 'input[name="username"]',
+    password: process.env.PASSWORD_SELECTOR || 'input[name="password"]',
+    loginButton: process.env.LOGIN_BUTTON_SELECTOR || 'input[type="submit"][value="Log In"]',
+    logoutButton: process.env.LOGOUT_BUTTON_SELECTOR || 'a[href="logout.htm"]'
   }
 };
 

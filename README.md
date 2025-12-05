@@ -1,373 +1,434 @@
-# Multi-Agent Test Automation Framework
+# 🤖 Multi-Agent Test Automation Framework
 
-A sophisticated TypeScript-based test automation framework that uses AI agents to collaborate on test creation and execution. The framework leverages Anthropic's Claude API for intelligent analysis and Playwright MCP for browser automation.
+**AI-Powered Test Automation with MCP (Model Context Protocol) & Playwright**
+
+A cutting-edge test automation framework that leverages multiple AI agents and browser automation through Model Context Protocol to generate, execute, and analyze tests intelligently.
+
+---
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+  - [Method 1: Full AI Pipeline](#method-1-full-ai-pipeline-4-agents)
+  - [Method 2: Direct Prompt Executor](#method-2-direct-prompt-executor)
+- [Output & Reports](#output--reports)
+- [Project Structure](#project-structure)
+- [Troubleshooting](#troubleshooting)
+- [Available Commands](#available-commands)
+
+---
+
+## 🌟 Overview
+
+This framework combines the power of **AI agents** (powered by Claude) with **Model Context Protocol (MCP)** for browser automation to create an end-to-end intelligent test automation system.
+
+### What Makes It Unique?
+
+- 🤖 **4 AI Agents** working together in a pipeline
+- 🎭 **Real Browser Automation** via Playwright MCP
+- 📊 **AI-Powered Analysis** with beautiful HTML reports
+- 🔄 **Two Execution Modes** for flexibility
+- 🌐 **Environment Management** for multi-environment testing
+- 🎨 **Beautiful Visual Reports** with insights and recommendations
+
+---
+
+## ✨ Key Features
+
+### 🤖 Multi-Agent Architecture
+- **Agent 1 (Story Analyst)**: Analyzes user stories and extracts requirements
+- **Agent 2 (Test Generator)**: Generates comprehensive test cases
+- **Agent 3 (Test Executor)**: Executes tests on real browsers via MCP
+- **Agent 4 (Results Analyzer)**: Provides AI-powered insights and analysis
+
+### 🎭 Real Browser Automation
+- Powered by **Playwright** through **Model Context Protocol (MCP)**
+- Supports headed (visible) and headless modes
+- Slow-motion mode for debugging
+- Cross-browser support (Chromium, Firefox, WebKit)
+
+### 📊 Intelligent Reporting
+- Beautiful HTML reports with AI insights
+- JSON data files for further analysis
+- Coverage gap detection
+- Trend analysis
+- Smart recommendations
+- Risk level assessment
+
+### 🔄 Flexible Execution
+- **Full AI Pipeline**: Complete story-to-execution workflow
+- **Direct Prompt Executor**: Fast execution from pre-generated test cases
+
+---
 
 ## 🏗️ Architecture
 
-The framework consists of 4 specialized AI agents that work together:
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   USER STORY INPUT                          │
+└──────────────────┬──────────────────────────────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────────────────────────────┐
+│  AGENT 1: Story Analyst (Claude 3.5 Sonnet)                │
+│  • Analyzes user story                                      │
+│  • Extracts requirements                                    │
+│  • Identifies test scenarios                                │
+└──────────────────┬──────────────────────────────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────────────────────────────┐
+│  AGENT 2: Test Generator (Claude 3.5 Sonnet)               │
+│  • Generates test cases                                     │
+│  • Creates test data                                        │
+│  • Defines test steps                                       │
+└──────────────────┬──────────────────────────────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────────────────────────────┐
+│  AGENT 3: Test Executor (Playwright MCP)                   │
+│  • Initializes browser via MCP                             │
+│  • Executes test steps                                      │
+│  • Captures results & errors                                │
+│  • Takes screenshots                                        │
+└──────────────────┬──────────────────────────────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────────────────────────────┐
+│  AGENT 4: Results Analyzer (Claude 3 Haiku)                │
+│  • Analyzes test results                                    │
+│  • Detects patterns & trends                                │
+│  • Identifies coverage gaps                                 │
+│  • Generates recommendations                                │
+│  • Creates beautiful HTML reports                           │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### 🔍 Agent 1 - Story Analyst Agent
-- **Purpose**: Analyzes user stories and extracts testable requirements
-- **Input**: User story text (Gherkin or plain English)
-- **Output**: Structured JSON with features, actions, outcomes, edge cases, and acceptance criteria
-- **Technology**: Claude API (Sonnet 3.5)
+For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
-### 🧪 Agent 2 - Test Generator Agent
-- **Purpose**: Generates comprehensive test cases from requirements
-- **Input**: Requirements from Story Analyst Agent
-- **Output**: Array of test cases with priorities, steps, assertions, and test data
-- **Technology**: Claude API (Sonnet 3.5)
+---
 
-### 🚀 Agent 3 - Test Executor Agent
-- **Purpose**: Executes tests using Playwright MCP integration
-- **Input**: Test cases from Test Generator Agent
-- **Output**: Test execution results with status, duration, errors, and screenshots
-- **Technology**: Playwright MCP, Claude API for natural language to automation conversion
+## 📦 Prerequisites
 
-### 📊 Agent 4 - Results Analyzer Agent
-- **Purpose**: Analyzes test results and provides intelligent insights
-- **Input**: Test execution results
-- **Output**: Analysis with metrics, risk assessment, trends, and recommendations
-- **Technology**: Claude API (Sonnet 3.5)
+- **Node.js**: v18 or higher
+- **npm**: v8 or higher
+- **TypeScript**: v5.x
+- **Anthropic API Key**: Get from [Anthropic Console](https://console.anthropic.com/)
 
-### 🤖 Orchestrator
-- **Purpose**: Coordinates all agents and manages the complete pipeline
-- **Features**: Error handling, retry logic, rate limiting, result persistence
+---
 
-## 🛠️ Tech Stack
+## 🚀 Installation
 
-- **Language**: TypeScript
-- **AI Provider**: Anthropic Claude API
-- **Browser Automation**: Playwright MCP
-- **Environment**: Node.js 18+
-- **Dependencies**:
-  - `@anthropic-ai/sdk` - Claude API integration
-  - `@modelcontextprotocol/sdk` - MCP client
-  - `@playwright/mcp-server` - Playwright MCP server
-  - `chalk` - Colored console output
-  - `dotenv` - Environment variable management
-
-## 🚀 Setup Instructions
-
-### 1. Prerequisites
-- Node.js 18 or higher
-- npm or yarn
-- Anthropic API key
-
-### 2. Installation
+### 1. Clone the Repository
 ```bash
-# Clone or download the project
-cd multi-agent-test-automation
+git clone https://github.com/ravikaanthe/MCP-MultiAgent-Framework.git
+cd MCP-MultiAgent-Framework
+```
 
-# Install dependencies
+### 2. Install Dependencies
+```bash
 npm install
-
-# Copy environment template
-copy .env.example .env
 ```
 
-### 3. Environment Configuration
-Edit `.env` file and add your Anthropic API key:
-```env
-ANTHROPIC_API_KEY=your_actual_api_key_here
-```
-
-Get your API key from: https://console.anthropic.com/
-
-### 4. Build and Run
+### 3. Install Playwright Browsers
 ```bash
-# Build TypeScript
-npm run build
-
-# Run the framework
-npm start
-
-# Or run in development mode
-npm run dev
+npx playwright install chromium
 ```
+
+---
+
+## ⚙️ Configuration
+
+### 1. Create Environment File
+
+Create a `.env` file in the project root:
+
+```env
+# Anthropic API Key (Required for AI Agents)
+ANTHROPIC_API_KEY=sk-ant-api03-your-api-key-here
+```
+
+### 2. Configure Test Environments
+
+Edit `src/config/environments.ts` to add your test environments:
+
+```typescript
+{
+  name: 'staging',
+  applications: {
+    'your-app': {
+      baseUrl: 'https://staging.your-app.com',
+      loginUrl: 'https://staging.your-app.com/login',
+      credentials: {
+        username: 'testuser',
+        password: 'testpass'
+      },
+      selectors: {
+        username: 'input[name="username"]',
+        password: 'input[name="password"]',
+        loginButton: 'button[type="submit"]'
+      }
+    }
+  }
+}
+```
+
+---
+
+## 🎯 Usage
+
+### Method 1: Full AI Pipeline (4 Agents)
+
+**Complete workflow from user story to execution and analysis.**
+
+#### Command
+```bash
+npm test -- <STORY_ID> [--headed]
+```
+
+#### Examples
+```bash
+# Execute in headless mode (default)
+npm test -- AUTH-001
+
+# Execute with visible browser
+npm test -- AUTH-001 --headed
+
+# Execute account management story
+npm test -- ACCT-002 --headed
+```
+
+#### What Happens:
+1. ✅ Agent 1 analyzes the user story
+2. ✅ Agent 2 generates test cases
+3. ✅ Agent 3 executes tests via Playwright MCP
+4. ✅ Agent 4 analyzes results with AI insights
+5. ✅ Beautiful HTML report generated
+
+#### Output Location:
+```
+outputs/
+├── test-cases/{module}/{STORY_ID}-tests.md
+└── test-results/{module}/{STORY_ID}-results-{timestamp}.{html|json}
+```
+
+---
+
+### Method 2: Direct Prompt Executor
+
+**Fast execution from pre-generated test cases.**
+
+#### Command
+```bash
+npm run prompt -- "<path-to-test-file>"
+```
+
+#### Examples
+```bash
+# Execute authentication tests
+npm run prompt -- "outputs/test-cases/authentication/AUTH-001-tests.md"
+
+# Execute account management tests
+npm run prompt -- "outputs/test-cases/account-management/ACCT-002-tests.md"
+```
+
+#### What Happens:
+1. ✅ Reads test cases from markdown file
+2. ✅ Executes tests via Playwright MCP (visible browser)
+3. ✅ Analyzes results with AI (Agent 4)
+4. ✅ Generates HTML + JSON reports
+
+#### Output Location:
+```
+outputs/test-results/{module}/{STORY_ID}-results-{timestamp}.{html|json}
+```
+
+---
+
+## 📊 Output & Reports
+
+### Report Types
+
+Both execution methods generate the same comprehensive reports:
+
+#### 1. **JSON Report** (Machine-readable)
+```json
+{
+  "storyId": "AUTH-001",
+  "module": "authentication",
+  "executionTime": "2025-12-05T18:48:31.806Z",
+  "totalDuration": 55881,
+  "summary": {
+    "totalTests": 5,
+    "passed": 4,
+    "failed": 1,
+    "passRate": 80
+  },
+  "analysis": {
+    "summary": "...",
+    "riskLevel": "medium",
+    "coverageGaps": [...],
+    "trends": [...],
+    "recommendations": [...]
+  },
+  "results": [...]
+}
+```
+
+#### 2. **HTML Report** (Beautiful visual report)
+
+Features:
+- 📊 Executive summary with metrics
+- 🎨 Color-coded test results
+- 📈 Pass rate visualization
+- 🚨 Critical issues highlighted
+- 💡 AI-powered recommendations
+- 🔍 Coverage gap analysis
+- 📉 Trend detection
+- ⏱️ Step-by-step timing
+
+**Open in Browser:**
+```
+file:///path/to/outputs/test-results/{module}/{STORY_ID}-results-{timestamp}.html
+```
+
+---
 
 ## 📁 Project Structure
 
 ```
-src/
-├── agents/
-│   ├── story-analyst.ts      # Agent 1 - Story analysis
-│   ├── test-generator.ts     # Agent 2 - Test case generation
-│   ├── test-executor.ts      # Agent 3 - Test execution with MCP
-│   └── results-analyzer.ts   # Agent 4 - Results analysis
-├── orchestrator.ts           # Main orchestrator class
-├── types.ts                  # TypeScript type definitions
-└── index.ts                  # Entry point and main function
+Multi-Agent Test Automation Framework/
+├── src/
+│   ├── agents/               # 4 AI Agents
+│   │   ├── story-analyst.ts      # Agent 1: Analyzes user stories
+│   │   ├── test-generator.ts     # Agent 2: Generates test cases
+│   │   ├── test-executor.ts      # Agent 3: Executes tests
+│   │   └── results-analyzer.ts   # Agent 4: Analyzes results
+│   ├── core/                 # Core framework
+│   │   ├── orchestrator.ts       # Orchestrates 4-agent pipeline
+│   │   └── types.ts              # TypeScript interfaces
+│   ├── config/               # Configuration
+│   │   └── environments.ts       # Environment management
+│   ├── executors/            # Execution engines
+│   │   └── prompt-executor.ts    # Direct execution from markdown
+│   ├── mcp/                  # Model Context Protocol
+│   │   └── playwright-mcp-server.ts  # Playwright MCP server
+│   ├── managers/             # Utility managers
+│   │   └── test-prompt-manager.ts    # Test case & results manager
+│   └── cli/                  # CLI tools
+├── user-stories/             # User story input files
+│   ├── authentication/
+│   └── account-management/
+├── outputs/                  # Generated outputs
+│   ├── test-cases/              # Generated test cases
+│   └── test-results/            # Test results & reports
+├── .env                      # Environment variables (API keys)
+├── package.json              # Dependencies & scripts
+├── tsconfig.json             # TypeScript configuration
+├── README.md                 # This file
+└── ARCHITECTURE.md           # Detailed architecture docs
 ```
 
-## 🎯 Usage
+---
 
-### 📚 Managing User Stories
+## 🐛 Troubleshooting
 
-The framework now includes a flexible **User Story Manager** that allows you to store and manage multiple user stories without editing code.
+### Issue: "ANTHROPIC_API_KEY not set" Warning
 
-#### **Quick Start**
-```bash
-# List all available user stories
-npm start --list
+**Cause**: Missing or invalid Anthropic API key
 
-# Run the first user story (default)
-npm start
+**Solution**:
+1. Create `.env` file in project root
+2. Add your API key: `ANTHROPIC_API_KEY=sk-ant-api03-your-key-here`
+3. Restart the application
 
-# Run a specific story by index
-npm start 2
+**What happens without API key:**
+- ✅ Tests still execute (Agent 3 doesn't need API)
+- ✅ Basic metrics are calculated
+- ❌ AI insights are unavailable (Agent 4 falls back to basic analysis)
 
-# Run a specific story by ID
-npm start user-login
+---
+
+### Issue: "spawn EINVAL" Error on Windows
+
+**Cause**: Windows cannot spawn `.cmd` files via stdio transport
+
+**Solution**: Already fixed! The framework now uses:
+```typescript
+command: 'node'
+args: ['node_modules/tsx/dist/cli.mjs', 'src/mcp/playwright-mcp-server.ts', '--headed']
 ```
 
-#### **User Stories File**
-User stories are stored in `user-stories.md`. The framework comes with 5 pre-configured stories:
+---
 
-1. **User Login Authentication** (ID: `user-login-authentic`)
-2. **User Registration** (ID: `user-registration`)
-3. **Product Search** (ID: `product-search`)
-4. **Shopping Cart Management** (ID: `shopping-cart-manage`)
-5. **Password Reset** (ID: `password-reset`)
+### Issue: Browser Not Opening
 
-#### **Adding Your Own Stories**
+**Cause**: MCP server not starting or wrong configuration
 
-**Method 1: Edit user-stories.md directly**
-```markdown
-## Your Story Title
-```
-As a user, I want to...
-So that I can...
+**Solution**:
+1. Check if Playwright is installed: `npx playwright install chromium`
+2. Verify MCP server path in executor files
+3. Run with `--headed` flag to see visible browser
+4. Check console logs for MCP server initialization
 
-Acceptance Criteria:
-- Criterion 1
-- Criterion 2
-```
-```
+---
 
-**Method 2: Use the CLI tool**
-```bash
-# Add a new story via command line
-npm run story-cli add "New Feature Story" "As a user, I want to test new features..."
+### Issue: "Analysis unavailable due to API error"
 
-# View available stories
-npm run story-cli list
+**Causes**:
+1. Invalid API key
+2. API key has no credits
+3. Network connectivity issues
+4. Anthropic API rate limits
 
-# View a specific story
-npm run story-cli view 1
-npm run story-cli view user-login
-```
+**Solutions**:
+1. Verify API key at [console.anthropic.com](https://console.anthropic.com/)
+2. Check API usage and credits
+3. Test network connectivity
+4. Wait and retry if rate-limited
 
-### 🚀 Running Tests
+**Fallback**: Framework provides basic analysis even without AI
 
-#### **Command Options**
-```bash
-# Basic usage
-npm start                    # Run first story
-npm start 2                  # Run story by index (1-5)
-npm start user-login         # Run story by ID
-npm start --list             # List all available stories
+---
 
-# Development
-npm run dev                  # Run in development mode
-npm run build               # Build TypeScript
-npm run validate            # Validate setup
+## 📝 Available Commands
 
-# Story management
-npm run story-cli list      # List all stories
-npm run story-cli view 2    # View specific story
-npm run story-cli add       # Add new story
-```
+| Command | Description |
+|---------|-------------|
+| `npm test -- <STORY_ID>` | Run full AI pipeline (4 agents) |
+| `npm test -- <STORY_ID> --headed` | Run with visible browser |
+| `npm run prompt -- "<file>"` | Execute from test case file |
+| `npm run build` | Compile TypeScript to JavaScript |
+| `npm run dev` | Run in development mode |
 
-#### **Example Workflow**
-```bash
-# 1. See what stories are available
-npm start --list
+---
 
-# 2. Run the registration story
-npm start 2
+## 🔗 Related Documentation
 
-# 3. Check results
-cat test-results.json
+- [Architecture Deep Dive](ARCHITECTURE.md) - Detailed technical documentation
+- [Anthropic API](https://docs.anthropic.com/) - Claude AI documentation
+- [Model Context Protocol](https://modelcontextprotocol.io/) - MCP specification
+- [Playwright](https://playwright.dev/) - Browser automation docs
 
-# 4. Add your own story
-npm run story-cli add "Password Change" "As a user, I want to change my password..."
-
-# 5. Run your new story
-npm start password-change
-```
-
-## 📊 Output
-
-### Console Output
-- Real-time progress with colored emojis
-- Step-by-step execution status
-- Comprehensive test report with metrics
-- Visual formatting with box drawing characters
-
-### File Output
-Results are saved to `test-results.json` with complete execution data:
-
-```json
-{
-  "timestamp": "2025-10-05T...",
-  "userStory": "As a user...",
-  "requirements": { "feature": "...", "actions": [...] },
-  "testCases": [{ "testName": "...", "steps": [...] }],
-  "testResults": [{ "testName": "...", "status": "passed" }],
-  "analysis": { "passRate": 85.5, "riskLevel": "medium" },
-  "totalExecutionTime": 45000
-}
-```
-
-## 🔧 Configuration
-
-### MCP Integration
-The framework automatically attempts to connect to Playwright MCP server. If a compatible MCP server is not available, the framework falls back to simulation mode for demonstration purposes.
-
-To use with actual browser automation, you would need to:
-1. Install a compatible Playwright MCP server
-2. Update the MCP connection configuration in `test-executor.ts`
-
-The current implementation demonstrates the complete agent collaboration workflow.
-
-### Error Handling
-- **API Rate Limiting**: Built-in delays between Claude API calls
-- **Test Retries**: Failed tests are retried up to 3 times
-- **Graceful Degradation**: Fallback responses if AI services are unavailable
-- **MCP Fallback**: Simulation mode if Playwright MCP is unavailable
-
-## 🧪 Available MCP Tools
-
-The Test Executor Agent can use these Playwright MCP tools:
-- `playwright_navigate` - Navigate to URL
-- `playwright_click` - Click elements
-- `playwright_fill` - Fill form fields
-- `playwright_screenshot` - Take screenshots
-- `playwright_evaluate` - Execute JavaScript
-- `playwright_get_text` - Extract text content
-
-## 🔍 Monitoring & Debugging
-
-### Console Logs
-Each agent provides detailed logging with emojis:
-- 🔍 Story Analyst operations
-- 🧪 Test Generator activities
-- 🚀 Test Executor actions
-- 📊 Results Analyzer insights
-
-### Error Handling
-- Try-catch blocks at every agent level
-- Detailed error messages with context
-- Stack traces for debugging
-- Graceful fallbacks for API failures
-
-## 🔮 Extensibility
-
-The framework is designed for easy extension:
-
-### Adding New Agents
-1. Create new agent class in `src/agents/`
-2. Implement required interface methods
-3. Add to orchestrator pipeline
-
-### Custom MCP Tools
-1. Extend `MCPToolCall` interface in `types.ts`
-2. Add tool mapping in `TestExecutorAgent`
-3. Update Claude prompts for new tools
-
-### Additional AI Providers
-1. Create provider-specific agent classes
-2. Implement common interface
-3. Add provider selection logic
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch
-3. Follow TypeScript best practices
-4. Add comprehensive error handling
-5. Include tests for new functionality
-6. Submit pull request
+---
 
 ## 📄 License
 
-MIT License - see LICENSE file for details
+This project is licensed under the ISC License.
 
-## 🆘 Troubleshooting
+---
 
-### Common Issues
+## 📧 Contact
 
-**API Key Error**:
-```
-❌ ANTHROPIC_API_KEY is required!
-```
-- Ensure `.env` file exists with valid API key
-- Check API key format and permissions
+- **Repository**: [github.com/ravikaanthe/MCP-MultiAgent-Framework](https://github.com/ravikaanthe/MCP-MultiAgent-Framework)
+- **Issues**: [GitHub Issues](https://github.com/ravikaanthe/MCP-MultiAgent-Framework/issues)
 
-**MCP Connection Failed**:
-```
-⚠️ MCP connection failed, will use simulation mode
-```
-- Ensure Node.js 18+ is installed
-- Check if `@playwright/mcp-server` is available
-- Framework will continue in simulation mode
+---
 
-**TypeScript Compilation Errors**:
-```bash
-npm run build
-```
-- Ensure all dependencies are installed
-- Check TypeScript version compatibility
-
-### Getting Help
-
-1. Check the console output for detailed error messages
-2. Review the `test-results.json` file for execution details
-3. Enable debug logging by modifying log levels
-4. Check network connectivity for API calls
-
-## 🎉 Example Output
-
-```
-🤖 MULTI-AGENT TEST AUTOMATION FRAMEWORK
-════════════════════════════════════════════════════════════
-Starting test automation pipeline...
-
-STEP 1: Story Analysis
-──────────────────────────────────
-🔍 Story Analyst Agent: Analyzing user story...
-✅ Story analysis completed
-   Feature: User Authentication
-   Actions: 3 identified
-   Edge cases: 2 identified
-
-STEP 2: Test Case Generation
-──────────────────────────────────
-🧪 Test Generator Agent: Generating test cases...
-✅ Test case generation completed
-   Generated 4 test cases
-   Priority breakdown: 2 high, 1 medium, 1 low
-
-STEP 3: Test Execution
-──────────────────────────────────
-🚀 Test Executor Agent: Initializing MCP connection...
-✅ MCP connection established
-🎯 Executing test: Successful login with valid credentials
-   ✅ Test passed (2340ms)
-...
-
-STEP 4: Results Analysis
-──────────────────────────────────
-📊 Results Analyzer Agent: Analyzing test results...
-✅ Results analysis completed
-   Risk Level: low
-   Pass Rate: 100.0%
-   Critical Issues: 0
-
-════════════════════════════════════════════════════════════
-                    📊 TEST EXECUTION REPORT
-════════════════════════════════════════════════════════════
-...
-✨ Pipeline completed successfully!
-```
+**Made with ❤️ using AI Agents, MCP, and Playwright**

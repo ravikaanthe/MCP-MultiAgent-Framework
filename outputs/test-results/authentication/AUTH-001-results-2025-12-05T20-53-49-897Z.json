@@ -1,0 +1,210 @@
+[
+  {
+    "testName": "Login with valid credentials",
+    "status": "failed",
+    "duration": 5991,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid username 'ficusroot' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter the valid password 'katal@n@ravi' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)",
+        "status": "failed",
+        "duration": 100,
+        "error": "Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+      },
+      {
+        "step": "Verify that the account overview page URL contains '/overview.htm'",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Welcome' message with the customer name is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Accounts Overview' heading is displayed",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the available accounts are listed with account numbers and balances",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the right side navigation menu displays the banking options (Open New Account, Transfer Funds, Bill Pay, Find Transactions, Update Contact Info, Request Loan, Log Out)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the 'Log Out' link is visible in the top navigation",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [
+      "Step 5: Authentication failed: Cannot verify page elements because login was unsuccessful. User was not redirected to authenticated page."
+    ],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with invalid credentials",
+    "status": "passed",
+    "duration": 2310,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter an invalid username 'invaliduser' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter an invalid password 'invalidpass' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is not redirected to the account overview page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that an error message is displayed indicating the invalid credentials",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with empty username",
+    "status": "passed",
+    "duration": 1735,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the username field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter a valid password 'katal@n@ravi' in the password field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is not redirected to the account overview page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that an error message is displayed indicating that the username field is required",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Login with empty password",
+    "status": "passed",
+    "duration": 1730,
+    "steps": [
+      {
+        "step": "Navigate to the ParaBank login page at https://parabank.parasoft.com/parabank/index.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Enter a valid username 'ficusroot' in the username field",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Leave the password field empty",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Click the 'Log In' button",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is not redirected to the account overview page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that an error message is displayed indicating that the password field is required",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  },
+  {
+    "testName": "Access account overview page without login",
+    "status": "passed",
+    "duration": 21,
+    "steps": [
+      {
+        "step": "Navigate directly to the account overview page at https://parabank.parasoft.com/parabank/overview.htm",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is not redirected to the account overview page (EXPECT: FAILURE)",
+        "status": "passed",
+        "duration": 100
+      },
+      {
+        "step": "Verify that the user is redirected to the login page",
+        "status": "passed",
+        "duration": 100
+      }
+    ],
+    "errors": [],
+    "screenshots": []
+  }
+]

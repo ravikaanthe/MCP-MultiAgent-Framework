@@ -1,0 +1,259 @@
+[
+  {
+    "storyId": "AUTH-001",
+    "module": "authentication",
+    "executionTime": "2025-12-05T19:31:46.932Z",
+    "totalDuration": 56123,
+    "summary": {
+      "totalTests": 5,
+      "passed": 4,
+      "failed": 1,
+      "passRate": 80
+    },
+    "analysis": {
+      "summary": "The test results indicate that the application's login functionality is not fully stable, with a pass rate of 80%. The failed test case for 'Login with valid credentials' suggests a critical issue in the application's core functionality.",
+      "riskLevel": "medium",
+      "passRate": 80,
+      "coverageGaps": [
+        "Lack of test coverage for edge cases or error handling in the login process"
+      ],
+      "trends": [
+        "Consistent passing of login tests with invalid credentials, indicating potential issues in the validation logic"
+      ],
+      "recommendations": [
+        "Investigate and address the root cause of the failure in the 'Login with valid credentials' test case",
+        "Expand test coverage to include more edge cases and error handling scenarios in the login process",
+        "Implement a more comprehensive regression testing suite to ensure the stability of the login functionality"
+      ],
+      "criticalIssues": [
+        "Failure in the 'Login with valid credentials' test case, which is a critical functionality"
+      ]
+    },
+    "results": [
+      {
+        "testName": "Login with valid credentials",
+        "status": "failed",
+        "duration": 10520,
+        "steps": [
+          {
+            "step": "Navigate to the ParaBank login page",
+            "status": "passed",
+            "duration": 3518
+          },
+          {
+            "step": "Enter valid username 'ficusroot'",
+            "status": "passed",
+            "duration": 1088
+          },
+          {
+            "step": "Enter valid password 'katal@n@ravi'",
+            "status": "passed",
+            "duration": 1052
+          },
+          {
+            "step": "Click the 'Log In' button",
+            "status": "passed",
+            "duration": 3283
+          },
+          {
+            "step": "Verify that the user is redirected to the account overview page (EXPECT: SUCCESS)",
+            "status": "failed",
+            "duration": 21,
+            "error": "Expected to be redirected to overview page"
+          },
+          {
+            "step": "Verify that the welcome message is displayed with the customer name (EXPECT: SUCCESS)",
+            "status": "failed",
+            "duration": 5,
+            "error": "Expected \"Welcome\" message not found"
+          },
+          {
+            "step": "Verify that the account overview section is displayed (EXPECT: SUCCESS)",
+            "status": "passed",
+            "duration": 518
+          },
+          {
+            "step": "Verify that the available accounts are listed with account numbers and balances (EXPECT: SUCCESS)",
+            "status": "passed",
+            "duration": 509
+          },
+          {
+            "step": "Verify that the right side navigation menu with banking options is displayed (EXPECT: SUCCESS)",
+            "status": "passed",
+            "duration": 516
+          }
+        ],
+        "errors": [
+          "Step 5: Expected to be redirected to overview page; Step 6: Expected \"Welcome\" message not found"
+        ]
+      },
+      {
+        "testName": "Login with invalid username",
+        "status": "passed",
+        "duration": 8554,
+        "steps": [
+          {
+            "step": "Navigate to the ParaBank login page",
+            "status": "passed",
+            "duration": 2158
+          },
+          {
+            "step": "Enter invalid username 'invaliduser'",
+            "status": "passed",
+            "duration": 1058
+          },
+          {
+            "step": "Enter valid password 'katal@n@ravi'",
+            "status": "passed",
+            "duration": 1026
+          },
+          {
+            "step": "Click the 'Log In' button",
+            "status": "passed",
+            "duration": 3268
+          },
+          {
+            "step": "Verify that the user is not redirected to the account overview page (EXPECT: FAILURE)",
+            "status": "passed",
+            "duration": 528
+          },
+          {
+            "step": "Verify that an error message is displayed indicating invalid login credentials (EXPECT: SUCCESS)",
+            "status": "passed",
+            "duration": 511
+          }
+        ],
+        "errors": []
+      },
+      {
+        "testName": "Login with invalid password",
+        "status": "passed",
+        "duration": 8525,
+        "steps": [
+          {
+            "step": "Navigate to the ParaBank login page",
+            "status": "passed",
+            "duration": 2196
+          },
+          {
+            "step": "Enter valid username 'ficusroot'",
+            "status": "passed",
+            "duration": 1059
+          },
+          {
+            "step": "Enter invalid password 'invalidpass'",
+            "status": "passed",
+            "duration": 1029
+          },
+          {
+            "step": "Click the 'Log In' button",
+            "status": "passed",
+            "duration": 3206
+          },
+          {
+            "step": "Verify that the user is not redirected to the account overview page (EXPECT: FAILURE)",
+            "status": "passed",
+            "duration": 516
+          },
+          {
+            "step": "Verify that an error message is displayed indicating invalid login credentials (EXPECT: SUCCESS)",
+            "status": "passed",
+            "duration": 513
+          }
+        ],
+        "errors": []
+      },
+      {
+        "testName": "Login with empty username or password",
+        "status": "passed",
+        "duration": 14269,
+        "steps": [
+          {
+            "step": "Navigate to the ParaBank login page",
+            "status": "passed",
+            "duration": 2167
+          },
+          {
+            "step": "Leave the username field empty",
+            "status": "passed",
+            "duration": 502
+          },
+          {
+            "step": "Enter valid password 'katal@n@ravi'",
+            "status": "passed",
+            "duration": 1055
+          },
+          {
+            "step": "Click the 'Log In' button",
+            "status": "passed",
+            "duration": 3176
+          },
+          {
+            "step": "Verify that the user is not redirected to the account overview page (EXPECT: FAILURE)",
+            "status": "passed",
+            "duration": 529
+          },
+          {
+            "step": "Verify that an error message is displayed indicating that both username and password are required (EXPECT: SUCCESS)",
+            "status": "passed",
+            "duration": 513
+          },
+          {
+            "step": "Clear the username field",
+            "status": "passed",
+            "duration": 514
+          },
+          {
+            "step": "Enter valid username 'ficusroot'",
+            "status": "passed",
+            "duration": 1046
+          },
+          {
+            "step": "Leave the password field empty",
+            "status": "passed",
+            "duration": 513
+          },
+          {
+            "step": "Click the 'Log In' button",
+            "status": "passed",
+            "duration": 3179
+          },
+          {
+            "step": "Verify that the user is not redirected to the account overview page (EXPECT: FAILURE)",
+            "status": "passed",
+            "duration": 547
+          },
+          {
+            "step": "Verify that an error message is displayed indicating that both username and password are required (EXPECT: SUCCESS)",
+            "status": "passed",
+            "duration": 512
+          }
+        ],
+        "errors": []
+      },
+      {
+        "testName": "Access account overview page without logging in",
+        "status": "passed",
+        "duration": 3243,
+        "steps": [
+          {
+            "step": "Navigate to the account overview page URL directly (https://parabank.parasoft.com/parabank/overview.htm)",
+            "status": "passed",
+            "duration": 2182
+          },
+          {
+            "step": "Verify that the user is not redirected to the account overview page (EXPECT: FAILURE)",
+            "status": "passed",
+            "duration": 544
+          },
+          {
+            "step": "Verify that the user is redirected to the login page (EXPECT: SUCCESS)",
+            "status": "passed",
+            "duration": 513
+          }
+        ],
+        "errors": []
+      }
+    ]
+  }
+]
