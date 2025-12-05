@@ -193,51 +193,132 @@ interface TestCase {
 
 ### 4. Agent 3: Test Executor (`src/agents/test-executor.ts`)
 
-**Purpose**: Executes tests using Playwright via MCP
+**Purpose**: Executes tests using **REAL Playwright browsers** via **MCP protocol**
 
 **Input**: Array of `TestCase` objects
 
 **Technology**: 
-- **Playwright**: Browser automation
-- **MCP (Model Context Protocol)**: Standardized tool interface
-- **StdioClientTransport**: Process-based communication
+- **Playwright**: Browser automation (REAL browsers, not mocked!)
+- **MCP (Model Context Protocol)**: Standardized tool interface using official SDK
+- **StdioClientTransport**: Process-based communication for reliability
+- **Windows-Compatible**: Fixed spawn handling with direct node + tsx execution
 
 **Key Features**:
-- Real browser automation (not mocked)
-- Headed/headless mode support
-- Screenshot capture on failure
-- Step-by-step execution tracking
-- Error recovery mechanisms
+- ✅ **REAL browser automation** - Actual Chromium/Firefox/WebKit instances
+- ✅ Headed/headless mode support (visible browser or background)
+- ✅ Screenshot capture on failure
+- ✅ Step-by-step execution tracking with timing
+- ✅ Error recovery mechanisms with graceful degradation
+- ✅ **Zero hardcoded values** - All configuration from environment variables
 
-**MCP Tools Used**:
+**MCP Tools Used** (from playwright-mcp-server.ts):
 ```typescript
 - playwright_navigate: Navigate to URLs
-- playwright_click: Click elements
-- playwright_type: Type text into inputs
+- playwright_type: Type text into inputs (using {selector, text} format)
+- playwright_click: Click elements (using {selector} format)
 - playwright_select: Select dropdown options
 - playwright_get_text: Get element text content
-- playwright_wait_for_selector: Wait for elements
+- playwright_snapshot: Get page accessibility snapshot
+- playwright_wait_for: Wait for elements/text
 - playwright_screenshot: Capture screenshots
-- playwright_close: Close browser
+```
+
+**Critical Implementation Details**:
+
+**Tool Name Format** (✅ FIXED):
+```typescript
+// ✅ CORRECT (current implementation):
+await this.mcpClient.callTool({
+  name: 'playwright_navigate',  // Correct tool name
+  arguments: { url: 'https://example.com' }
+});
+
+// ❌ WRONG (old implementation - now fixed):
+await this.mcpClient.callTool({
+  name: 'mcp_playwright_browser_navigate',  // Wrong prefix
+  arguments: { url: 'https://example.com' }
+});
+```
+
+**Argument Format** (✅ FIXED):
+```typescript
+// ✅ CORRECT (current implementation):
+await this.mcpClient.callTool({
+  name: 'playwright_type',
+  arguments: {
+    selector: 'input[name="username"]',  // Direct selector
+    text: 'ficusroot'
+  }
+});
+
+// ❌ WRONG (old implementation - now fixed):
+await this.mcpClient.callTool({
+  name: 'playwright_type',
+  arguments: {
+    element: 'username field',  // Wrong format
+    ref: 'input[name="username"]',
+    text: 'ficusroot'
+  }
+});
 ```
 
 **Execution Flow**:
-1. Initialize MCP client and Playwright server
-2. Parse test steps into MCP tool calls
-3. Execute each step sequentially
-4. Capture step duration and status
-5. Handle errors gracefully
-6. Collect results
+1. Initialize MCP client with StdioClientTransport
+2. Spawn Playwright MCP server process (node + tsx)
+3. Connect client to server via stdio
+4. Parse test steps into MCP tool calls with correct format
+5. Execute each step sequentially with error handling
+6. Capture step duration, status, and errors
+7. Handle authentication state tracking
+8. Collect results with detailed error messages
+9. Cleanup: Close browser and terminate server process
 
-**Windows Compatibility**:
+**Windows Compatibility Fix** (✅ IMPLEMENTED):
 ```typescript
-// Special handling for Windows spawn issues
+// Problem: npx.cmd doesn't work with {shell: false} on Windows
+// Solution: Use node + tsx directly
+
 const command = 'node';
-const tsxLoaderPath = 'node_modules/tsx/dist/cli.mjs';
+const tsxLoaderPath = path.resolve(
+  process.cwd(), 
+  'node_modules', 
+  'tsx', 
+  'dist', 
+  'cli.mjs'
+);
+
 const transport = new StdioClientTransport({
   command: command,
-  args: [tsxLoaderPath, mcpServerPath, '--headed']
+  args: [
+    tsxLoaderPath,              // Direct path to tsx loader
+    mcpServerPath,               // Path to MCP server
+    this.headedMode ? '--headed' : '--headless'
+  ]
 });
+
+await this.mcpClient.connect(transport);
+```
+
+**Environment-Driven Configuration**:
+```typescript
+// All credentials from environment (zero hardcoded values)
+import EnvironmentManager from '../config/environments.js';
+
+// Get credentials dynamically
+const validCreds = EnvironmentManager.getValidCredentials();
+const invalidCreds = EnvironmentManager.getInvalidCredentials();
+const urls = EnvironmentManager.getUrls();
+
+// Use in test execution
+if (testCase.testData?.username) {
+  await this.mcpClient.callTool({
+    name: 'playwright_type',
+    arguments: {
+      selector: 'input[name="username"]',
+      text: testCase.testData.username  // From test data or env
+    }
+  });
+}
 ```
 
 ---
@@ -356,11 +437,22 @@ try {
 
 ### What is MCP?
 
-Model Context Protocol is a standardized way for AI assistants to interact with external tools and services through a unified interface.
+Model Context Protocol is a **standardized way for AI assistants to interact with external tools and services** through a unified interface. In this framework, MCP enables Claude AI agents to control **REAL Playwright browsers** through a standardized protocol.
+
+### Why MCP for Browser Automation?
+
+1. **Standardization**: Consistent tool interface across all browser actions
+2. **Decoupling**: Browser automation logic separated from test execution logic
+3. **Reliability**: Process isolation prevents browser crashes from affecting agents
+4. **Flexibility**: Easy to add new tools or swap browser implementations
+5. **Security**: Controlled access to browser capabilities through defined tools
+6. **Real Browsers**: Actual Playwright instances (Chromium/Firefox/WebKit), not mocked
 
 ### MCP Implementation in Framework
 
 #### Server Side (`src/mcp/playwright-mcp-server.ts`)
+
+**Purpose**: Exposes Playwright browser automation as MCP tools
 
 ```typescript
 class PlaywrightMCPServer {
@@ -368,27 +460,90 @@ class PlaywrightMCPServer {
   private browser: Browser | null = null;
   private page: Page | null = null;
 
+  async initialize() {
+    // Launch REAL Playwright browser
+    this.browser = await chromium.launch({
+      headless: this.headless,
+      slowMo: this.slowMo
+    });
+    this.context = await this.browser.newContext();
+    this.page = await this.context.newPage();
+  }
+
   setupToolHandlers() {
-    // Define available tools
+    // Define available MCP tools
     this.server.setRequestHandler(ListToolsRequestSchema, async () => ({
       tools: [
         {
           name: 'playwright_navigate',
           description: 'Navigate browser to a URL',
-          inputSchema: { /* ... */ }
+          inputSchema: {
+            type: 'object',
+            properties: {
+              url: { type: 'string', description: 'URL to navigate to' }
+            },
+            required: ['url']
+          }
         },
+        {
+          name: 'playwright_type',
+          description: 'Type text into an input field',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              selector: { type: 'string', description: 'CSS selector' },
+              text: { type: 'string', description: 'Text to type' }
+            },
+            required: ['selector', 'text']
+          }
+        },
+        {
+          name: 'playwright_click',
+          description: 'Click an element',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              selector: { type: 'string', description: 'CSS selector' }
+            },
+            required: ['selector']
+          }
+        }
         // ... other tools
       ]
     }));
 
-    // Handle tool execution
+    // Handle tool execution on REAL browser
     this.server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const { name, arguments: args } = request.params;
       
       switch (name) {
         case 'playwright_navigate':
           await this.page!.goto(args.url);
-          return { content: [{ type: 'text', text: `Navigated to ${args.url}` }] };
+          return { 
+            content: [{ 
+              type: 'text', 
+              text: `✅ Navigated to ${args.url}` 
+            }] 
+          };
+          
+        case 'playwright_type':
+          await this.page!.fill(args.selector, args.text);
+          return { 
+            content: [{ 
+              type: 'text', 
+              text: `✅ Typed "${args.text}" into ${args.selector}` 
+            }] 
+          };
+          
+        case 'playwright_click':
+          await this.page!.click(args.selector);
+          return { 
+            content: [{ 
+              type: 'text', 
+              text: `✅ Clicked ${args.selector}` 
+            }] 
+          };
+        
         // ... other tool implementations
       }
     });
@@ -396,37 +551,105 @@ class PlaywrightMCPServer {
 }
 ```
 
-#### Client Side (Agent 3)
+#### Client Side (Agent 3 - Test Executor)
+
+**Purpose**: Connects to MCP server and calls tools to automate tests
 
 ```typescript
-// Initialize MCP client
-this.mcpClient = new Client(
-  { name: 'test-executor', version: '1.0.0' },
-  { capabilities: {} }
-);
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+import path from 'path';
 
-// Connect via stdio transport
-const transport = new StdioClientTransport({
-  command: 'node',
-  args: [tsxLoader, mcpServerPath, '--headed']
-});
+class TestExecutorAgent {
+  private mcpClient: Client | null = null;
+  
+  async initializeMCP(): Promise<void> {
+    console.log('🚀 Initializing REAL MCP Browser Automation...');
+    
+    // Create MCP client
+    this.mcpClient = new Client(
+      { name: 'test-executor', version: '1.0.0' },
+      { capabilities: {} }
+    );
 
-await this.mcpClient.connect(transport);
+    // Windows-compatible spawn configuration
+    const command = 'node';
+    const tsxLoaderPath = path.resolve(
+      process.cwd(), 
+      'node_modules', 
+      'tsx', 
+      'dist', 
+      'cli.mjs'
+    );
+    const mcpServerPath = path.resolve(
+      process.cwd(), 
+      'src/mcp/playwright-mcp-server.ts'
+    );
 
-// Call tools
-await this.mcpClient.callTool({
-  name: 'playwright_navigate',
-  arguments: { url: 'https://example.com' }
-});
+    // Connect via stdio transport
+    const transport = new StdioClientTransport({
+      command: command,
+      args: [
+        tsxLoaderPath,
+        mcpServerPath,
+        this.headedMode ? '--headed' : '--headless'
+      ]
+    });
+
+    await this.mcpClient.connect(transport);
+    
+    console.log('✅ REAL MCP Browser Automation initialized!');
+  }
+
+  // Call MCP tools to control REAL browser
+  async executeBrowserAction(toolName: string, args: any): Promise<any> {
+    if (!this.mcpClient) {
+      throw new Error('MCP client not initialized');
+    }
+    
+    try {
+      const result = await this.mcpClient.callTool({
+        name: toolName,
+        arguments: args
+      });
+      
+      return result;
+    } catch (error) {
+      throw new Error(`MCP tool execution failed: ${error.message}`);
+    }
+  }
+  
+  // Example: Navigate to a URL
+  async navigate(url: string): Promise<void> {
+    await this.executeBrowserAction('playwright_navigate', { url });
+  }
+  
+  // Example: Type into input field
+  async typeText(selector: string, text: string): Promise<void> {
+    await this.executeBrowserAction('playwright_type', { 
+      selector, 
+      text 
+    });
+  }
+  
+  // Example: Click an element
+  async clickElement(selector: string): Promise<void> {
+    await this.executeBrowserAction('playwright_click', { 
+      selector 
+    });
+  }
+}
 ```
 
-### Benefits of MCP
+### Benefits of MCP in This Framework
 
-1. **Standardization**: Consistent interface for all tools
-2. **Decoupling**: Browser automation separated from test logic
-3. **Flexibility**: Easy to add new tools or swap implementations
-4. **Reliability**: Process isolation prevents crashes from affecting agents
-5. **Security**: Controlled access to browser capabilities
+1. **Standardization**: All browser actions use consistent MCP tool interface
+2. **Decoupling**: Test execution logic is separate from browser automation
+3. **Flexibility**: Easy to add new browser actions as MCP tools
+4. **Reliability**: Process isolation - browser crashes don't affect test execution
+5. **Security**: Controlled access to browser through defined tool schemas
+6. **Real Automation**: Actual Playwright browsers, not simulations
+7. **Cross-Platform**: Works on Windows, macOS, and Linux with same interface
 
 ---
 

@@ -30,28 +30,35 @@ This framework combines the power of **AI agents** (powered by Claude) with **Mo
 
 ### What Makes It Unique?
 
-- 🤖 **4 AI Agents** working together in a pipeline
-- 🎭 **Real Browser Automation** via Playwright MCP
+- 🤖 **4 AI Agents** working together in a pipeline using **Claude AI**
+- 🎭 **REAL Browser Automation** - No simulation! Actual Playwright browser via MCP
+- 🌐 **Real MCP Integration** - Using official Model Context Protocol SDK
 - 📊 **AI-Powered Analysis** with beautiful HTML reports
-- 🔄 **Two Execution Modes** for flexibility
-- 🌐 **Environment Management** for multi-environment testing
-- 🎨 **Beautiful Visual Reports** with insights and recommendations
+- 🔄 **Two Execution Modes** - Full AI Pipeline or Direct Prompt Executor
+- � **Environment-Driven** - Zero hardcoded values, all from environment variables
+- 🎨 **Beautiful Visual Reports** with AI insights and recommendations
+- ✅ **Production Ready** - Tested on Windows with real browser automation
 
 ---
 
 ## ✨ Key Features
 
 ### 🤖 Multi-Agent Architecture
-- **Agent 1 (Story Analyst)**: Analyzes user stories and extracts requirements
-- **Agent 2 (Test Generator)**: Generates comprehensive test cases
-- **Agent 3 (Test Executor)**: Executes tests on real browsers via MCP
-- **Agent 4 (Results Analyzer)**: Provides AI-powered insights and analysis
+- **Agent 1 (Story Analyst)**: Analyzes user stories using **Claude 3.5 Sonnet**
+- **Agent 2 (Test Generator)**: Generates comprehensive test cases using **Claude 3.5 Sonnet**
+- **Agent 3 (Test Executor)**: Executes tests on **REAL browsers** via **Playwright MCP** (no AI needed)
+- **Agent 4 (Results Analyzer)**: Provides AI-powered insights using **Claude 3 Haiku**
+
+**Important**: Agent 3 uses **REAL MCP browser automation** - not simulated! Actual Playwright browsers controlled through Model Context Protocol.
 
 ### 🎭 Real Browser Automation
 - Powered by **Playwright** through **Model Context Protocol (MCP)**
+- **REAL browsers** - Chromium, Firefox, or WebKit (no mocking/simulation)
+- Uses official **@modelcontextprotocol/sdk** for standardized tool interface
 - Supports headed (visible) and headless modes
 - Slow-motion mode for debugging
-- Cross-browser support (Chromium, Firefox, WebKit)
+- Windows-compatible with fixed spawn handling (node + tsx direct execution)
+- StdioClientTransport for reliable process communication
 
 ### 📊 Intelligent Reporting
 - Beautiful HTML reports with AI insights
@@ -156,27 +163,41 @@ ANTHROPIC_API_KEY=sk-ant-api03-your-api-key-here
 
 ### 2. Configure Test Environments
 
-Edit `src/config/environments.ts` to add your test environments:
+The framework uses **environment variables** for all configuration (zero hardcoded values).
 
+Edit your `.env` file to configure test environments:
+
+```env
+# ParaBank Test Environment Configuration
+BASE_URL=https://parabank.parasoft.com/parabank
+LOGIN_URL=https://parabank.parasoft.com/parabank/index.htm
+OPEN_ACCOUNT_URL=https://parabank.parasoft.com/parabank/openaccount.htm
+
+# Valid Test Credentials
+VALID_USERNAME=ficusroot
+VALID_PASSWORD=katal@n@ravi
+
+# Invalid Test Credentials (for negative testing)
+INVALID_USERNAME=invaliduser
+INVALID_PASSWORD=invalidpass
+
+# Test Data
+VALID_SOURCE_ACCOUNT=29217
+INVALID_SOURCE_ACCOUNT=12345
+DEFAULT_ACCOUNT_TYPE=SAVINGS
+```
+
+**Environment Manager** (`src/config/environments.ts`) provides centralized access:
 ```typescript
-{
-  name: 'staging',
-  applications: {
-    'your-app': {
-      baseUrl: 'https://staging.your-app.com',
-      loginUrl: 'https://staging.your-app.com/login',
-      credentials: {
-        username: 'testuser',
-        password: 'testpass'
-      },
-      selectors: {
-        username: 'input[name="username"]',
-        password: 'input[name="password"]',
-        loginButton: 'button[type="submit"]'
-      }
-    }
-  }
-}
+import EnvironmentManager from './config/environments.js';
+
+// Get credentials
+const validCreds = EnvironmentManager.getValidCredentials();
+// { username: 'ficusroot', password: 'katal@n@ravi' }
+
+// Get URLs
+const urls = EnvironmentManager.getUrls();
+// { baseUrl: '...', loginUrl: '...', ... }
 ```
 
 ---
@@ -357,13 +378,28 @@ Multi-Agent Test Automation Framework/
 
 ### Issue: "spawn EINVAL" Error on Windows
 
-**Cause**: Windows cannot spawn `.cmd` files via stdio transport
+**Status**: ✅ **FIXED** in latest version!
 
-**Solution**: Already fixed! The framework now uses:
+**What was wrong**: Windows cannot spawn `.cmd` files with `{shell: false}` via StdioClientTransport
+
+**How we fixed it**:
 ```typescript
-command: 'node'
-args: ['node_modules/tsx/dist/cli.mjs', 'src/mcp/playwright-mcp-server.ts', '--headed']
+// OLD (BROKEN on Windows):
+const transport = new StdioClientTransport({
+  command: 'npx.cmd',
+  args: ['tsx', 'src/mcp/playwright-mcp-server.ts', '--headed']
+});
+
+// NEW (WORKING on Windows):
+const command = 'node';
+const tsxLoaderPath = path.resolve(process.cwd(), 'node_modules', 'tsx', 'dist', 'cli.mjs');
+const transport = new StdioClientTransport({
+  command: command,
+  args: [tsxLoaderPath, mcpServerPath, '--headed']
+});
 ```
+
+**Result**: MCP server now starts reliably on Windows with REAL browser automation!
 
 ---
 
