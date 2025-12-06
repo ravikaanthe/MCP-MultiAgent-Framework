@@ -19,6 +19,7 @@ A cutting-edge test automation platform that leverages multiple AI agents and re
   - [Method 2: Direct Prompt Executor](#method-2-direct-prompt-executor)
 - [Output & Reports](#output--reports)
 - [Project Structure](#project-structure)
+- [Roadmap](#-roadmap)
 - [Troubleshooting](#troubleshooting)
 - [Available Commands](#available-commands)
 
@@ -433,7 +434,50 @@ const transport = new StdioClientTransport({
 
 ---
 
-## 📝 Available Commands
+## �️ Roadmap
+
+### ✅ Phase 1: UI Test Automation (COMPLETE)
+- [x] Multi-agent AI architecture with Claude (4 specialized agents)
+- [x] Model Context Protocol integration with Playwright
+- [x] Real browser automation (Chromium/Firefox/WebKit)
+- [x] Autonomous test generation from user stories
+- [x] AI-powered result analysis with insights
+- [x] Environment-driven configuration (zero hardcoded values)
+- [x] Cross-platform support (Windows/Mac/Linux)
+- [x] HTML reports with AI recommendations
+- [x] Two execution modes (Full Pipeline + Direct Prompt)
+
+### 🔄 Phase 2: API & Scale (IN PROGRESS - Q1 2026)
+- [ ] REST API testing support
+- [ ] GraphQL testing support
+- [ ] Hybrid UI + API test scenarios
+- [ ] Authentication handling (OAuth, JWT, API keys)
+- [ ] Parallel test execution
+- [ ] Worker pool management for scale
+- [ ] Test result aggregation across parallel runs
+
+### 🔄 Phase 3: Enterprise Integration (PLANNED - Q2 2026)
+- [ ] CI/CD templates (GitHub Actions, Jenkins, GitLab CI)
+- [ ] Docker containerization with docker-compose
+- [ ] Kubernetes deployment examples
+- [ ] Test data management and seeding
+- [ ] Database fixture support
+- [ ] Advanced reporting dashboard
+- [ ] Trend analysis and failure pattern detection
+
+### 🔮 Phase 4: Advanced Features (FUTURE)
+- [ ] Visual regression testing integration
+- [ ] Self-healing test capabilities (auto-update selectors)
+- [ ] Performance testing integration (load/stress tests)
+- [ ] Multi-application testing workflows
+- [ ] Mobile testing support (iOS/Android)
+- [ ] Test management tool integrations (Jira, TestRail)
+
+**Want a feature?** [Open an issue](https://github.com/ravikaanthe/MCP-MultiAgent-Framework/issues) or contribute via pull request!
+
+---
+
+## �📝 Available Commands
 
 | Command | Description |
 |---------|-------------|
