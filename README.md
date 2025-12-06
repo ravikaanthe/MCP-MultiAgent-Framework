@@ -1,8 +1,8 @@
-# 🤖 Multi-Agent Test Automation Framework
+# 🤖 Agentic AI Multi-Agent Test Automation Platform with Model Context Protocol
 
-**AI-Powered Test Automation with MCP (Model Context Protocol) & Playwright**
+**Powered by Claude AI & Playwright**
 
-A cutting-edge test automation framework that leverages multiple AI agents and browser automation through Model Context Protocol to generate, execute, and analyze tests intelligently.
+A cutting-edge test automation platform that leverages multiple AI agents and real browser automation through Model Context Protocol to autonomously generate, execute, and analyze tests intelligently.
 
 ---
 
